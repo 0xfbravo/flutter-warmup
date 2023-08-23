@@ -63,7 +63,7 @@ android {
             resValue "string", "app_name", "WeatherApp.dev"
         }
         prod {
-            dimension "app"
+            dimension "weatherapp"
             resValue "string", "app_name", "WeatherApp"
         }
     }
