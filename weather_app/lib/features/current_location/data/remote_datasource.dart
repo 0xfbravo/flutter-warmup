@@ -1,9 +1,9 @@
-abstract class CurrentLocationRemoteDataSource {
+abstract class CurrentLocationWeatherRemoteDataSource {
   Future<void> getCurrentLocationWeather();
 }
 
-class CurrentLocationRemoteDataSourceImpl
-    implements CurrentLocationRemoteDataSource {
+class CurrentLocationWeatherRemoteDataSourceImpl
+    implements CurrentLocationWeatherRemoteDataSource {
   @override
   Future<void> getCurrentLocationWeather() async {
     // TODO(0xfbravo): implement

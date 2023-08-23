@@ -1,3 +1,4 @@
+import 'package:get_it/get_it.dart';
 import 'package:weather_app/features/current_location/data/repository.dart';
 
 abstract class GetCurrentLocationWeatherUseCase {
@@ -6,11 +7,10 @@ abstract class GetCurrentLocationWeatherUseCase {
 
 class GetCurrentLocationWeatherUseCaseImpl
     implements GetCurrentLocationWeatherUseCase {
-  GetCurrentLocationWeatherUseCaseImpl(this.currentLocationRepository);
-  final CurrentLocationRepository currentLocationRepository;
+  final CurrentLocationWeatherRepository repository = GetIt.I();
 
   @override
   Future<void> call() async {
-    return currentLocationRepository.getCurrentLocationWeather();
+    return repository.getCurrentLocationWeather();
   }
 }
