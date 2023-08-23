@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:weather_app/features/current_location/presentation/view.dart';
+import 'package:weather_app/features/current_weather/presentation/view.dart';
 import 'package:weather_app/features/saved_location_forecast/presentation/view.dart';
 
 class WeatherApp extends StatefulWidget {
@@ -41,7 +41,7 @@ class _WeatherAppState extends State<WeatherApp> {
           ),
           body: const TabBarView(
             children: <Widget>[
-              CurrentLocationWeatherView(),
+              CurrentWeatherView(),
               SavedLocationForecastView(),
             ],
           ),
