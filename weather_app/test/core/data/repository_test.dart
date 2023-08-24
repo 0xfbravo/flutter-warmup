@@ -20,12 +20,12 @@ void main() {
   final localDataSource = MockCoreLocalDataSource();
   final remoteDataSource = MockCoreRemoteDataSource();
 
-  setUp(() {
-    GetIt.I.reset();
-  });
-
   group('[Core] Repository', () {
     group('getSavedLocations', () {
+      setUp(() {
+        GetIt.I.reset();
+      });
+
       test('it should return a empty list', () {
         when(localDataSource.getSavedLocations()).thenAnswer((_) async => []);
         GetIt.I.registerFactory<CoreLocalDataSource>(() => localDataSource);
@@ -62,6 +62,10 @@ void main() {
 
   group('searchLocation', () {
     const query = 'Mock Location, Mock';
+
+    setUp(() {
+      GetIt.I.reset();
+    });
 
     test('it should return an error', () {
       when(remoteDataSource.searchLocation(query: query))
