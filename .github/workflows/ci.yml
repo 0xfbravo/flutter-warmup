@@ -14,6 +14,8 @@ jobs:
   ci:
     runs-on: ubuntu-latest
     name: 🔍 Analysis
+    permissions:
+      contents: write
     steps:
       - name: 🔍 Checkout
         uses: actions/checkout@v3
@@ -22,7 +24,7 @@ jobs:
         uses: subosito/flutter-action@v2
         with:
           channel: ${{ env.FLUTTER_CHANNEL }}
-          version: ${{ env.FLUTTER_VERSION }}
+          flutter-version: ${{ env.FLUTTER_VERSION }}
 
       - name: 🧹 Flutter Clean
         working-directory: weather_app
