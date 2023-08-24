@@ -1,4 +1,7 @@
+// Package imports:
 import 'package:get_it/get_it.dart';
+
+// Project imports:
 import 'package:weather_app/core/data/local_datasource.dart';
 import 'package:weather_app/core/data/remote_datasource.dart';
 import 'package:weather_app/core/domain/model/saved_location_model.dart';

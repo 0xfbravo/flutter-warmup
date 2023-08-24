@@ -1,11 +1,14 @@
+// Package imports:
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
+
+// Project imports:
+import 'package:weather_app/core/data/remote_datasource.dart';
 import 'package:weather_app/core/domain/model/saved_location_model.dart';
 import 'remote_datasource_test.mocks.dart';
 
 @GenerateNiceMocks([MockSpec<CoreRemoteDataSource>()])
-import 'package:weather_app/core/data/remote_datasource.dart';
 
 void main() {
   group('[Core] Remote Datasource', () {

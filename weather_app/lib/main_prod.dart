@@ -1,4 +1,7 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Project imports:
 import 'package:weather_app/app.dart';
 import 'package:weather_app/core/dependency_injection.dart';
 

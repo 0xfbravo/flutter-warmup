@@ -1,3 +1,4 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
 
 class CurrentWeatherView extends StatefulWidget {
@@ -10,7 +11,7 @@ class CurrentWeatherView extends StatefulWidget {
 class _CurrentWeatherViewState extends State<CurrentWeatherView> {
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return const Column(
       children: [
         Text('Current Weather'),
       ],

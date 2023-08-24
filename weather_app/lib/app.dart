@@ -1,5 +1,10 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:get/get.dart';
+
+// Project imports:
 import 'package:weather_app/features/current_weather/presentation/view.dart';
 import 'package:weather_app/features/saved_location_forecast/presentation/view.dart';
 
