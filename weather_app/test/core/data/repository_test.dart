@@ -17,14 +17,14 @@ import 'remote_datasource_test.mocks.dart';
   MockSpec<CoreRepository>(),
 ])
 void main() {
+  final localDataSource = MockCoreLocalDataSource();
+  final remoteDataSource = MockCoreRemoteDataSource();
+
+  setUp(() {
+    GetIt.I.reset();
+  });
+
   group('[Core] Repository', () {
-    final localDataSource = MockCoreLocalDataSource();
-    final remoteDataSource = MockCoreRemoteDataSource();
-
-    setUp(() {
-      GetIt.I.reset();
-    });
-
     group('getSavedLocations', () {
       test('it should return a empty list', () {
         when(localDataSource.getSavedLocations()).thenAnswer((_) async => []);
@@ -56,6 +56,48 @@ void main() {
 
         final mock = CoreRepositoryImpl();
         mock.getSavedLocations().then((value) => expect(value, isNotEmpty));
+      });
+    });
+  });
+
+  group('searchLocation', () {
+    const query = 'Mock Location, Mock';
+
+    test('it should return an error', () {
+      when(remoteDataSource.searchLocation(query: query))
+          .thenThrow(Exception('Something went wrong'));
+      GetIt.I.registerFactory<CoreLocalDataSource>(() => localDataSource);
+      GetIt.I.registerFactory<CoreRemoteDataSource>(() => remoteDataSource);
+
+      final mock = CoreRepositoryImpl();
+      expect(() => mock.searchLocation(query: query), throwsException);
+    });
+
+    test('it should return a value from server', () {
+      when(remoteDataSource.searchLocation(query: query)).thenAnswer(
+        (_) async => SavedLocationModel(name: 'Mock Location', lat: 0, lon: 0),
+      );
+      GetIt.I.registerFactory<CoreLocalDataSource>(() => localDataSource);
+      GetIt.I.registerFactory<CoreRemoteDataSource>(() => remoteDataSource);
+
+      final mock = CoreRepositoryImpl();
+      mock.searchLocation(query: query).then((value) {
+        expect(value, isNotNull);
+        expect(value.name.isNotEmpty, isTrue);
+      });
+    });
+
+    test('it should return a value from cache', () {
+      when(localDataSource.hasCachedLocation(query: query)).thenAnswer(
+        (_) async => SavedLocationModel(name: 'Mock Location', lat: 0, lon: 0),
+      );
+      GetIt.I.registerFactory<CoreLocalDataSource>(() => localDataSource);
+      GetIt.I.registerFactory<CoreRemoteDataSource>(() => remoteDataSource);
+
+      final mock = CoreRepositoryImpl();
+      mock.searchLocation(query: query).then((value) {
+        expect(value, isNotNull);
+        expect(value.name.isNotEmpty, isTrue);
       });
     });
   });
