@@ -3,13 +3,12 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:weather_app/core/data/local_datasource.dart';
 
 // Project imports:
+import 'package:weather_app/core/data/local_datasource.dart';
 import 'package:weather_app/core/data/remote_datasource.dart';
 import 'package:weather_app/core/data/repository.dart';
 import 'package:weather_app/core/domain/model/saved_location_model.dart';
-
 import 'local_datasource_test.mocks.dart';
 import 'remote_datasource_test.mocks.dart';
 

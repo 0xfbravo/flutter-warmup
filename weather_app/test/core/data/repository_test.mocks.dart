@@ -3,9 +3,14 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
+
+// Dart imports:
 import 'dart:async' as _i4;
 
+// Package imports:
 import 'package:mockito/mockito.dart' as _i1;
+
+// Project imports:
 import 'package:weather_app/core/data/repository.dart' as _i3;
 import 'package:weather_app/core/domain/model/saved_location_model.dart' as _i2;
 
