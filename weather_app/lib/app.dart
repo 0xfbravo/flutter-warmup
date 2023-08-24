@@ -29,8 +29,8 @@ class _WeatherAppState extends State<WeatherApp> {
             bottom: const TabBar(
               tabs: <Widget>[
                 Tab(
-                  icon: Icon(Icons.pin_drop),
-                  text: 'Current location',
+                  icon: Icon(Icons.cloud),
+                  text: 'Current weather',
                 ),
                 Tab(
                   icon: Icon(Icons.sunny_snowing),

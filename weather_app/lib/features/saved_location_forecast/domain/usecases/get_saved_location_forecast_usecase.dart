@@ -8,10 +8,10 @@ abstract class GetSavedLocationForecastUseCase {
 class GetSavedLocationForecastUseCaseImpl
     implements GetSavedLocationForecastUseCase {
   GetSavedLocationForecastUseCaseImpl();
-  final SavedLocationForecastRepository repository = GetIt.I();
+  final SavedLocationForecastRepository _repository = GetIt.I();
 
   @override
   Future<void> call() async {
-    return repository.getSavedLocationForecast();
+    return _repository.getSavedLocationForecast();
   }
 }

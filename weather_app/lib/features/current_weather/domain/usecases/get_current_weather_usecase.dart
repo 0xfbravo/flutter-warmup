@@ -6,10 +6,10 @@ abstract class GetCurrentWeatherUseCase {
 }
 
 class GetCurrentWeatherUseCaseImpl implements GetCurrentWeatherUseCase {
-  final CurrentWeatherRepository repository = GetIt.I();
+  final CurrentWeatherRepository _repository = GetIt.I();
 
   @override
   Future<void> call() async {
-    return repository.getCurrentWeather();
+    return _repository.getCurrentWeather();
   }
 }
