@@ -9,7 +9,6 @@ import 'package:weather_app/core/domain/model/saved_location_model.dart';
 import 'local_datasource_test.mocks.dart';
 
 @GenerateNiceMocks([MockSpec<CoreLocalDataSource>()])
-
 void main() {
   group('[Core] Local Datasource', () {
     group('hasCachedLocation', () {

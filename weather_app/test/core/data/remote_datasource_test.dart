@@ -9,7 +9,6 @@ import 'package:weather_app/core/domain/model/saved_location_model.dart';
 import 'remote_datasource_test.mocks.dart';
 
 @GenerateNiceMocks([MockSpec<CoreRemoteDataSource>()])
-
 void main() {
   group('[Core] Remote Datasource', () {
     group('searchLocation', () {
