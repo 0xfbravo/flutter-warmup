@@ -12,7 +12,7 @@ on:
 
 jobs:
   ci:
-    runs-on: ubuntu-latest-16-cores
+    runs-on: ubuntu-latest
     name: 🔍 Analysis
     steps:
       - name: 🔍 Checkout
