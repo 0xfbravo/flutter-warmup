@@ -1,6 +1,8 @@
 // 📦 Package imports:
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
+import 'package:hive/hive.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
@@ -8,6 +10,7 @@ import 'package:mockito/mockito.dart';
 import 'package:weather_app/core/data/local_datasource.dart';
 import 'package:weather_app/core/data/remote_datasource.dart';
 import 'package:weather_app/core/data/repository.dart';
+import 'package:weather_app/core/dependency_injection.dart';
 import 'package:weather_app/core/domain/model/saved_location_model.dart';
 import 'local_datasource_test.mocks.dart';
 import 'remote_datasource_test.mocks.dart';
@@ -21,8 +24,16 @@ void main() {
 
   group('[Core] Repository', () {
     group('getSavedLocations', () {
-      tearDown(() {
-        GetIt.I.reset();
+      setUp(() async {
+        await dotenv.load(fileName: '.env');
+        Hive.init('./hive-tests');
+      });
+
+      tearDown(() async {
+        Hive.resetAdapters();
+        await Hive.deleteFromDisk();
+        await GetIt.I.reset();
+        dotenv.clean();
       });
 
       test('it should return a empty list', () {
@@ -62,8 +73,16 @@ void main() {
   group('searchLocation', () {
     const query = 'Mock Location, Mock';
 
-    tearDown(() {
-      GetIt.I.reset();
+    setUp(() async {
+      await dotenv.load(fileName: '.env');
+      Hive.init('./hive-tests');
+    });
+
+    tearDown(() async {
+      Hive.resetAdapters();
+      await Hive.deleteFromDisk();
+      await GetIt.I.reset();
+      dotenv.clean();
     });
 
     test('it should return an error', () {

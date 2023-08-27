@@ -2,6 +2,7 @@
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
+import 'package:hive/hive.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
@@ -17,8 +18,16 @@ void main() {
     group('searchLocation', () {
       const query = 'Mock Location, Mock';
 
-      tearDown(() {
-        GetIt.I.reset();
+      setUp(() async {
+        await dotenv.load(fileName: '.env');
+        Hive.init('./hive-tests');
+      });
+
+      tearDown(() async {
+        Hive.resetAdapters();
+        await Hive.deleteFromDisk();
+        await GetIt.I.reset();
+        dotenv.clean();
       });
 
       test('it should return an error', () {
@@ -41,8 +50,7 @@ void main() {
       });
 
       test('it should return do a successful request', () async {
-        await dotenv.load(fileName: '.env');
-        setupDependencyInjection();
+        await setupDependencyInjection();
         final datasource = GetIt.I<CoreRemoteDataSource>();
         await datasource
             .searchLocation(query: 'Monte Carlo, Monaco')
@@ -53,8 +61,7 @@ void main() {
       });
 
       test('it should return do an unsuccessful request', () async {
-        await dotenv.load(fileName: '.env');
-        setupDependencyInjection();
+        await setupDependencyInjection();
         final datasource = GetIt.I<CoreRemoteDataSource>();
         expect(
           () => datasource.searchLocation(query: 'Abubleblé, Das Ideias'),

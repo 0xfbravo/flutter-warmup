@@ -42,7 +42,7 @@ android {
 
     defaultConfig {
         applicationId "eth.oxfbravo.weatherapp"
-        minSdkVersion flutter.minSdkVersion
+        minSdkVersion 23
         targetSdkVersion flutter.targetSdkVersion
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName

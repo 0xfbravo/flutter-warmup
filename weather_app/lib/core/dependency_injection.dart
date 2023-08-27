@@ -2,18 +2,20 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get_it/get_it.dart';
+import 'package:hive/hive.dart';
 
 // 🌎 Project imports:
 import 'package:weather_app/core/data/local_datasource.dart';
 import 'package:weather_app/core/data/remote_datasource.dart';
 import 'package:weather_app/core/data/repository.dart';
+import 'package:weather_app/core/domain/model/saved_location_model.dart';
 import 'package:weather_app/core/domain/usecases/get_saved_locations_usecase.dart';
 import 'package:weather_app/core/domain/usecases/search_location_usecase.dart';
 import 'package:weather_app/features/current_weather/dependency_injection.dart';
 import 'package:weather_app/features/saved_location_forecast/dependency_injection.dart';
 
-void setupDependencyInjection() {
-  CorePackage.setup();
+Future<void> setupDependencyInjection() async {
+  await CorePackage.setup();
   CurrentWeatherPackage.setup();
   SavedLocationForecastPackage.setup();
 }
@@ -21,10 +23,17 @@ void setupDependencyInjection() {
 class CorePackage {
   CorePackage._();
 
-  static void setup() {
+  static Future<void> setup() async {
+    await _setupHive();
     _setupDio();
     _setupData();
     _setupDomain();
+  }
+
+  static Future<void> _setupHive() async {
+    Hive
+      ..init('./hive')
+      ..registerAdapter(SavedLocationModelAdapter());
   }
 
   static void _setupDio() {

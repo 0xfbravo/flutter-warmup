@@ -1,4 +1,5 @@
 // 🌎 Project imports:
+import 'package:hive/hive.dart';
 import 'package:weather_app/core/domain/model/saved_location_model.dart';
 
 abstract class CoreLocalDataSource {
@@ -12,30 +13,31 @@ abstract class CoreLocalDataSource {
 }
 
 class CoreLocalDataSourceImpl implements CoreLocalDataSource {
+  Future<Box<SavedLocationModel>> _getHiveBox() async {
+    return Hive.openBox<SavedLocationModel>('saved_locations');
+  }
+
   @override
   Future<SavedLocationModel?> hasCachedLocation({
     required String query,
   }) async {
-    // TODO(0xfbravo): implement
-    return null;
+    final hiveBox = await _getHiveBox();
+    final cachedValue = hiveBox.get(query);
+    return cachedValue;
   }
 
   @override
   Future<List<SavedLocationModel>> getSavedLocations() async {
-    // TODO(0xfbravo): Get saved locations from local storage
-    return [
-      SavedLocationModel(name: 'Silverstone, UK', lat: 0, lon: 0),
-      SavedLocationModel(name: 'São Paulo, Brazil', lat: 0, lon: 0),
-      SavedLocationModel(name: 'Melbourne, Australia', lat: 0, lon: 0),
-      SavedLocationModel(name: 'Monte Carlo, Monaco', lat: 0, lon: 0),
-    ];
+    final hiveBox = await _getHiveBox();
+    return hiveBox.values.toList();
   }
 
   @override
   Future<bool> saveLocation({
     required SavedLocationModel location,
   }) async {
-    // TODO(0xfbravo): implement
+    final hiveBox = await _getHiveBox();
+    await hiveBox.put(location.name, location);
     return true;
   }
 }

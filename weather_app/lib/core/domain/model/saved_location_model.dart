@@ -1,21 +1,21 @@
 // 📦 Package imports:
-import 'package:json_annotation/json_annotation.dart';
-
+import 'package:hive/hive.dart';
 part 'saved_location_model.g.dart';
 
-@JsonSerializable()
-class SavedLocationModel {
+@HiveType(typeId: 0)
+class SavedLocationModel extends HiveObject {
   SavedLocationModel({
     required this.name,
     required this.lat,
     required this.lon,
   });
 
-  factory SavedLocationModel.fromJson(Map<String, dynamic> json) =>
-      _$SavedLocationModelFromJson(json);
-  Map<String, dynamic> toJson() => _$SavedLocationModelToJson(this);
-
+  @HiveField(0)
   final String name;
+
+  @HiveField(1)
   final double lat;
+
+  @HiveField(2)
   final double lon;
 }
