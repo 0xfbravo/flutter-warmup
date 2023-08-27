@@ -35,6 +35,7 @@ jobs:
         run: flutter pub get
 
       - name: 🛠 .env Config
+        working-directory: weather_app
         run: |
           rm -rf .env
           (echo -n "$DOT_ENV" | base64 --decode) > .env
