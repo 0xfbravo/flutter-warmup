@@ -6,7 +6,7 @@ env:
 
 on:
   push:
-    branches: [main, develop]
+    branches: [develop]
   pull_request:
     branches: [main, develop]
 
@@ -33,6 +33,11 @@ jobs:
       - name: 📦 Flutter install
         working-directory: weather_app
         run: flutter pub get
+
+      - name: 🛠 .env Config
+        run: |
+          rm -rf .env
+          (echo -n "$DOT_ENV" | base64 --decode) > .env
 
       - name: 📖 Run lint
         working-directory: weather_app
