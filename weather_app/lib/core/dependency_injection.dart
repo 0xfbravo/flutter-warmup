@@ -1,4 +1,6 @@
 // 📦 Package imports:
+import 'package:dio/dio.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get_it/get_it.dart';
 
 // 🌎 Project imports:
@@ -20,8 +22,21 @@ class CorePackage {
   CorePackage._();
 
   static void setup() {
+    _setupDio();
     _setupData();
     _setupDomain();
+  }
+
+  static void _setupDio() {
+    final dio = Dio(
+      BaseOptions(
+        baseUrl: dotenv.env['OPEN_WEATHER_API_URL'] ?? 'unknown',
+        queryParameters: {
+          'appid': dotenv.env['OPEN_WEATHER_API_TOKEN'] ?? 'unknown',
+        },
+      ),
+    );
+    GetIt.I.registerFactory<Dio>(() => dio);
   }
 
   static void _setupData() {

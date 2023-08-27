@@ -21,7 +21,7 @@ void main() {
 
   group('[Core] Repository', () {
     group('getSavedLocations', () {
-      setUp(() {
+      tearDown(() {
         GetIt.I.reset();
       });
 
@@ -62,7 +62,7 @@ void main() {
   group('searchLocation', () {
     const query = 'Mock Location, Mock';
 
-    setUp(() {
+    tearDown(() {
       GetIt.I.reset();
     });
 

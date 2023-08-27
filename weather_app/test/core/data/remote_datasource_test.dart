@@ -1,10 +1,13 @@
 // 📦 Package imports:
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:get_it/get_it.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
 // 🌎 Project imports:
 import 'package:weather_app/core/data/remote_datasource.dart';
+import 'package:weather_app/core/dependency_injection.dart';
 import 'package:weather_app/core/domain/model/saved_location_model.dart';
 import 'remote_datasource_test.mocks.dart';
 
@@ -13,6 +16,10 @@ void main() {
   group('[Core] Remote Datasource', () {
     group('searchLocation', () {
       const query = 'Mock Location, Mock';
+
+      tearDown(() {
+        GetIt.I.reset();
+      });
 
       test('it should return an error', () {
         final mock = MockCoreRemoteDataSource();
@@ -31,6 +38,28 @@ void main() {
           expect(value, isNotNull);
           expect(value.name.isNotEmpty, isTrue);
         });
+      });
+
+      test('it should return do a successful request', () async {
+        await dotenv.load(fileName: '.env');
+        setupDependencyInjection();
+        final datasource = GetIt.I<CoreRemoteDataSource>();
+        await datasource
+            .searchLocation(query: 'Monte Carlo, Monaco')
+            .then((value) {
+          expect(value, isNotNull);
+          expect(value.name.isNotEmpty, isTrue);
+        });
+      });
+
+      test('it should return do an unsuccessful request', () async {
+        await dotenv.load(fileName: '.env');
+        setupDependencyInjection();
+        final datasource = GetIt.I<CoreRemoteDataSource>();
+        expect(
+          () => datasource.searchLocation(query: 'Abubleblé, Das Ideias'),
+          throwsException,
+        );
       });
     });
   });

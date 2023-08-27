@@ -1,4 +1,7 @@
 // 🌎 Project imports:
+import 'package:dio/dio.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:get_it/get_it.dart';
 import 'package:weather_app/core/domain/model/saved_location_model.dart';
 
 abstract class CoreRemoteDataSource {
@@ -12,8 +15,25 @@ class CoreRemoteDataSourceImpl implements CoreRemoteDataSource {
   Future<SavedLocationModel> searchLocation({
     required String query,
   }) async {
-    // TODO(0xfbravo): Search location using OpenWeatherMap API
-    // https://openweathermap.org/api/geocoding-api
-    return SavedLocationModel(name: query, lat: 0, lon: 0);
+    final dio = GetIt.I<Dio>();
+    final path = dotenv.env['OPEN_WEATHER_GEOCODING_PATH'] ?? 'unknown';
+    final response = await dio.get<List<dynamic>>(
+      path,
+      queryParameters: {
+        'q': query,
+        'limit': 1,
+      },
+    );
+
+    final data = response.data;
+    if (data == null || data.isEmpty) {
+      throw Exception('No data found for query: $query');
+    }
+
+    return SavedLocationModel(
+      name: query,
+      lat: data.first['lat']! as double,
+      lon: data.first['lon']! as double,
+    );
   }
 }
