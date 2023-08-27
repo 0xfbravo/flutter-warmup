@@ -1,7 +1,7 @@
-// Package imports:
+// 📦 Package imports:
 import 'package:get_it/get_it.dart';
 
-// Project imports:
+// 🌎 Project imports:
 import 'package:weather_app/features/current_weather/data/local_datasource.dart';
 import 'package:weather_app/features/current_weather/data/remote_datasource.dart';
 import 'package:weather_app/features/current_weather/data/repository.dart';
