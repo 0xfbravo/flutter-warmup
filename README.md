@@ -21,13 +21,16 @@ To use it, you should copy the `.example.env` and rename it to `.env`
 Into the `.env` file, look for the key `OPEN_WEATHER_API_TOKEN` and fill it with your own OpenWeather's API token.
 
 e.g:
-```
+
+```bash
 OPEN_WEATHER_API_TOKEN=HERE_GOES_YOUR_TOKEN
 ```
 
 ---
 
-## 🛠️ More apps to come...
+## 🛠️ More apps to come
+
 If you'd like to see more art made with Flutter take a look at this one published:
+
 - [NFTICKIT - Android](https://play.google.com/store/apps/details?id=nftick.it.app)
 - [NFTICKIT - iOS](https://apps.apple.com/br/app/nftickit/id1613329192?l=en)
