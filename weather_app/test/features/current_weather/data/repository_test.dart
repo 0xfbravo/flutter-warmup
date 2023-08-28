@@ -55,15 +55,17 @@ void main() {
 
         final repository = CurrentWeatherRepositoryImpl();
         expect(
-            () =>
-                repository.getCurrentWeather(savedLocationModel: mockLocation),
-            throwsException);
+          () => repository.getCurrentWeather(savedLocationModel: mockLocation),
+          throwsException,
+        );
       });
 
       test('it should return a value from server', () {
-        when(remoteDataSource.getCurrentWeather(
-                savedLocationModel: mockLocation))
-            .thenAnswer(
+        when(
+          remoteDataSource.getCurrentWeather(
+            savedLocationModel: mockLocation,
+          ),
+        ).thenAnswer(
           (_) async => CurrentWeatherModel(
             latitude: 0,
             longitude: 0,
@@ -119,9 +121,11 @@ void main() {
           ),
         );
         GetIt.I.registerFactory<CurrentWeatherLocalDataSource>(
-            () => localDataSource);
+          () => localDataSource,
+        );
         GetIt.I.registerFactory<CurrentWeatherRemoteDataSource>(
-            () => remoteDataSource);
+          () => remoteDataSource,
+        );
 
         final repository = CurrentWeatherRepositoryImpl();
         repository
