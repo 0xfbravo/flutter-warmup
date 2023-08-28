@@ -24,8 +24,7 @@ class CoreLocalDataSourceImpl implements CoreLocalDataSource {
     required String query,
   }) async {
     final hiveBox = await _getHiveBox();
-    final cachedValue = hiveBox.get(query);
-    return cachedValue;
+    return hiveBox.get(query);
   }
 
   @override

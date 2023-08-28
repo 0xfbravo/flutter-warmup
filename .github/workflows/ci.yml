@@ -62,7 +62,7 @@ jobs:
         working-directory: weather_app
         run: "echo 'TODO: E2E Test'"
 
-      - name: Upload coverage reports to Codecov
+      - name: ☂️ Upload coverage reports to Codecov
         uses: codecov/codecov-action@v3
 
       - uses: stefanzweifel/git-auto-commit-action@v4

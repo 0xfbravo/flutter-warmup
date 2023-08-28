@@ -8,7 +8,7 @@ part of 'saved_location_model.dart';
 
 class SavedLocationModelAdapter extends TypeAdapter<SavedLocationModel> {
   @override
-  final int typeId = 1;
+  final int typeId = 0;
 
   @override
   SavedLocationModel read(BinaryReader reader) {

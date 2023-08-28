@@ -12,6 +12,7 @@ import 'package:weather_app/core/domain/model/saved_location_model.dart';
 import 'package:weather_app/core/domain/usecases/get_saved_locations_usecase.dart';
 import 'package:weather_app/core/domain/usecases/search_location_usecase.dart';
 import 'package:weather_app/features/current_weather/dependency_injection.dart';
+import 'package:weather_app/features/current_weather/domain/model/current_weather_model.dart';
 import 'package:weather_app/features/saved_location_forecast/dependency_injection.dart';
 
 Future<void> setupDependencyInjection() async {
@@ -33,7 +34,8 @@ class CorePackage {
   static Future<void> _setupHive() async {
     Hive
       ..init('./hive')
-      ..registerAdapter(SavedLocationModelAdapter());
+      ..registerAdapter(SavedLocationModelAdapter())
+      ..registerAdapter(CurrentWeatherModelAdapter());
   }
 
   static void _setupDio() {
