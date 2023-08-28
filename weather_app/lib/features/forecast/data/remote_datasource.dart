@@ -1,7 +1,9 @@
-// 🌎 Project imports:
+// 📦 Package imports:
 import 'package:dio/dio.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get_it/get_it.dart';
+
+// 🌎 Project imports:
 import 'package:weather_app/core/domain/model/location_model.dart';
 import 'package:weather_app/features/forecast/domain/model/forecast_model.dart';
 
