@@ -1,0 +1,80 @@
+plugins {
+    id "com.android.application"
+    id "kotlin-android"
+    id "dev.flutter.flutter-gradle-plugin"
+}
+
+def localProperties = new Properties()
+def localPropertiesFile = rootProject.file('local.properties')
+if (localPropertiesFile.exists()) {
+    localPropertiesFile.withReader('UTF-8') { reader ->
+        localProperties.load(reader)
+    }
+}
+
+def flutterVersionCode = localProperties.getProperty('flutter.versionCode')
+if (flutterVersionCode == null) {
+    flutterVersionCode = '1'
+}
+
+def flutterVersionName = localProperties.getProperty('flutter.versionName')
+if (flutterVersionName == null) {
+    flutterVersionName = '1.0'
+}
+
+android {
+    namespace "eth.oxfbravo.weatherapp"
+    compileSdkVersion flutter.compileSdkVersion
+    ndkVersion flutter.ndkVersion
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
+    }
+
+    defaultConfig {
+        applicationId "eth.oxfbravo.weatherapp"
+        minSdkVersion 23
+        targetSdkVersion flutter.targetSdkVersion
+        versionCode flutterVersionCode.toInteger()
+        versionName flutterVersionName
+    }
+
+    buildTypes {
+        release {
+            signingConfig signingConfigs.debug
+        }
+    }
+
+    flavorDimensions "weatherapp"
+    productFlavors {
+        dev {
+            dimension "weatherapp"
+            applicationIdSuffix ".dev"
+            versionNameSuffix ".dev"
+            resValue "string", "app_name", "WeatherApp.dev"
+        }
+        prod {
+            dimension "weatherapp"
+            resValue "string", "app_name", "WeatherApp"
+        }
+    }
+    
+    lint {
+        checkReleaseBuilds false
+    }
+}
+
+flutter {
+    source '../..'
+}
+
+dependencies {}
