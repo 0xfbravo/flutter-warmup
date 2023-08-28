@@ -31,19 +31,24 @@ class _CurrentWeatherPageViewState extends State<CurrentWeatherPageView> {
           }
 
           state as CurrentWeatherPageLoaded;
-          return ListView.separated(
-            itemBuilder: (BuildContext context, int index) {
-              return CurrentWeatherView(
-                location: state.locations[index],
-              );
-            },
-            separatorBuilder: (BuildContext context, int index) =>
-                const Divider(
-              height: 1,
-              thickness: 1,
-              color: Colors.transparent,
+          return RefreshIndicator(
+            onRefresh: context.read<CurrentWeatherPageCubit>().getLocations,
+            backgroundColor: Colors.amber,
+            color: Colors.white,
+            child: ListView.separated(
+              itemBuilder: (BuildContext context, int index) {
+                return CurrentWeatherView(
+                  location: state.locations[index],
+                );
+              },
+              separatorBuilder: (BuildContext context, int index) =>
+                  const Divider(
+                height: 1,
+                thickness: 1,
+                color: Colors.transparent,
+              ),
+              itemCount: state.locations.length,
             ),
-            itemCount: state.locations.length,
           );
         },
       ),
