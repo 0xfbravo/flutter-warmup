@@ -3,6 +3,7 @@ name: '🚧 Apps CI'
 env:
   FLUTTER_VERSION: 3.13.0
   FLUTTER_CHANNEL: stable
+  DOT_ENV: ${{ secrets.DOT_ENV }}
   CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 
 on:
