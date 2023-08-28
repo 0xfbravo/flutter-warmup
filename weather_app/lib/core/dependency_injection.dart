@@ -13,12 +13,12 @@ import 'package:weather_app/core/domain/usecases/get_saved_locations_usecase.dar
 import 'package:weather_app/core/domain/usecases/search_location_usecase.dart';
 import 'package:weather_app/features/current_weather/dependency_injection.dart';
 import 'package:weather_app/features/current_weather/domain/model/current_weather_model.dart';
-import 'package:weather_app/features/saved_location_forecast/dependency_injection.dart';
+import 'package:weather_app/features/forecast/dependency_injection.dart';
 
 Future<void> setupDependencyInjection() async {
   await CorePackage.setup();
   CurrentWeatherPackage.setup();
-  SavedLocationForecastPackage.setup();
+  ForecastPackage.setup();
 }
 
 class CorePackage {

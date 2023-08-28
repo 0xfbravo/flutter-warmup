@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 
 // 🌎 Project imports:
 import 'package:weather_app/features/current_weather/presentation/view.dart';
-import 'package:weather_app/features/saved_location_forecast/presentation/view.dart';
+import 'package:weather_app/features/forecast/presentation/view.dart';
 
 class WeatherApp extends StatefulWidget {
   const WeatherApp({super.key});
@@ -47,7 +47,7 @@ class _WeatherAppState extends State<WeatherApp> {
           body: const TabBarView(
             children: <Widget>[
               CurrentWeatherView(),
-              SavedLocationForecastView(),
+              ForecastView(),
             ],
           ),
         ),
