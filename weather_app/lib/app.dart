@@ -1,12 +1,8 @@
 // 🐦 Flutter imports:
 import 'package:flutter/material.dart';
-
 // 📦 Package imports:
 import 'package:get/get.dart';
-
-// 🌎 Project imports:
-import 'package:weather_app/features/current_weather/presentation/view.dart';
-import 'package:weather_app/features/forecast/presentation/view.dart';
+import 'package:weather_app/splashscreen.dart';
 
 class WeatherApp extends StatefulWidget {
   const WeatherApp({super.key});
@@ -26,32 +22,7 @@ class _WeatherAppState extends State<WeatherApp> {
           primarySwatch: Colors.cyan,
         ),
       ),
-      home: DefaultTabController(
-        length: 2,
-        child: Scaffold(
-          appBar: AppBar(
-            title: const Text('Weather App'),
-            bottom: const TabBar(
-              tabs: <Widget>[
-                Tab(
-                  icon: Icon(Icons.cloud),
-                  text: 'Current weather',
-                ),
-                Tab(
-                  icon: Icon(Icons.sunny_snowing),
-                  text: 'Forecast',
-                ),
-              ],
-            ),
-          ),
-          body: const TabBarView(
-            children: <Widget>[
-              CurrentWeatherView(),
-              ForecastView(),
-            ],
-          ),
-        ),
-      ),
+      home: const Splashscreen(),
     );
   }
 }

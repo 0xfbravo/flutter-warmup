@@ -17,8 +17,8 @@ abstract class ForecastLocalDataSource {
 }
 
 class ForecastLocalDataSourceImpl implements ForecastLocalDataSource {
-  Future<Box<List<ForecastModel>>> _getHiveBox() async {
-    return Hive.openBox<List<ForecastModel>>('forecast');
+  Future<Box<List<dynamic>>> _getHiveBox() async {
+    return Hive.openBox<List<dynamic>>('forecast');
   }
 
   @override
@@ -26,13 +26,18 @@ class ForecastLocalDataSourceImpl implements ForecastLocalDataSource {
     required LocationModel location,
   }) async {
     final hiveBox = await _getHiveBox();
-    return hiveBox.get(location.name);
+    return hiveBox
+        .get(location.name.trim().toLowerCase().hashCode)
+        ?.map((e) => e as ForecastModel)
+        .toList();
   }
 
   @override
   Future<List<List<ForecastModel>>> getSavedForecasts() async {
     final hiveBox = await _getHiveBox();
-    return hiveBox.values.toList();
+    return hiveBox.values
+        .map((e) => e.map((e) => e as ForecastModel).toList())
+        .toList();
   }
 
   @override
@@ -41,7 +46,7 @@ class ForecastLocalDataSourceImpl implements ForecastLocalDataSource {
     required List<ForecastModel> forecast,
   }) async {
     final hiveBox = await _getHiveBox();
-    await hiveBox.put(location.name, forecast);
+    await hiveBox.put(location.name.trim().toLowerCase().hashCode, forecast);
     return true;
   }
 }

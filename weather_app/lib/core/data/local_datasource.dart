@@ -38,7 +38,7 @@ class CoreLocalDataSourceImpl implements CoreLocalDataSource {
     required LocationModel location,
   }) async {
     final hiveBox = await _getHiveBox();
-    await hiveBox.put(location.name, location);
+    await hiveBox.put(location.name.trim().toLowerCase().hashCode, location);
     return true;
   }
 }
