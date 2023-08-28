@@ -1,8 +1,8 @@
 // 📦 Package imports:
 import 'package:get_it/get_it.dart';
-import 'package:weather_app/core/domain/model/location_model.dart';
 
 // 🌎 Project imports:
+import 'package:weather_app/core/domain/model/location_model.dart';
 import 'package:weather_app/features/forecast/data/local_datasource.dart';
 import 'package:weather_app/features/forecast/data/remote_datasource.dart';
 
