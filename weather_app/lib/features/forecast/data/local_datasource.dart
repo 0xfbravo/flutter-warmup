@@ -1,5 +1,7 @@
-// 🌎 Project imports:
+// 📦 Package imports:
 import 'package:hive/hive.dart';
+
+// 🌎 Project imports:
 import 'package:weather_app/core/domain/model/location_model.dart';
 import 'package:weather_app/features/forecast/domain/model/forecast_model.dart';
 
