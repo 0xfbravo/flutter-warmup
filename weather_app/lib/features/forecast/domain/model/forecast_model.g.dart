@@ -17,7 +17,7 @@ class ForecastModelAdapter extends TypeAdapter<ForecastModel> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return ForecastModel(
-      date: fields[0] as DateTime,
+      date: fields[0] as String,
       latitude: fields[1] as double,
       longitude: fields[2] as double,
       main: fields[3] as String,

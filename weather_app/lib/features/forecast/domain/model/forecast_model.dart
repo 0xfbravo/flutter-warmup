@@ -22,7 +22,7 @@ class ForecastModel {
   });
 
   @HiveField(0)
-  final DateTime date;
+  final String date;
 
   @HiveField(1)
   final double latitude;

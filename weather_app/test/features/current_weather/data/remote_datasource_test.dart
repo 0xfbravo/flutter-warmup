@@ -70,7 +70,7 @@ void main() {
         });
       });
 
-      test('it should return do a successful request', () async {
+      test('it should do a successful request', () async {
         await setupDependencyInjection();
         final datasource = GetIt.I<CurrentWeatherRemoteDataSource>();
         await datasource
@@ -81,7 +81,7 @@ void main() {
         });
       });
 
-      test('it should return do an unsuccessful request', () async {
+      test('it should do an unsuccessful request', () async {
         await setupDependencyInjection();
         final datasource = GetIt.I<CurrentWeatherRemoteDataSource>();
         expect(
