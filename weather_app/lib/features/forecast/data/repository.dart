@@ -21,7 +21,20 @@ class ForecastRepositoryImpl implements ForecastRepository {
   Future<List<ForecastModel>> getForecast({
     required LocationModel location,
   }) async {
-    // TODO(0xfbravo): implement
-    return [];
+    final cachedForecast = await localDataSource.hasCached(
+      location: location,
+    );
+    if (cachedForecast != null) {
+      return cachedForecast;
+    }
+
+    final forecast = await remoteDataSource.getForecast(
+      location: location,
+    );
+    await localDataSource.saveForecast(
+      location: location,
+      forecast: forecast,
+    );
+    return forecast;
   }
 }
