@@ -7,6 +7,7 @@ import 'package:weather_app/features/current_weather/data/remote_datasource.dart
 import 'package:weather_app/features/current_weather/data/repository.dart';
 import 'package:weather_app/features/current_weather/domain/usecases/get_current_weather_usecase.dart';
 import 'package:weather_app/features/current_weather/presentation/cubit.dart';
+import 'package:weather_app/features/current_weather/presentation/current_weather_widget/cubit.dart';
 
 class CurrentWeatherPackage {
   CurrentWeatherPackage._();
@@ -37,8 +38,12 @@ class CurrentWeatherPackage {
   }
 
   static void _setupPresentation() {
-    GetIt.I.registerFactory<CurrentWeatherCubit>(
-      CurrentWeatherCubit.new,
-    );
+    GetIt.I
+      ..registerFactory<CurrentWeatherPageCubit>(
+        CurrentWeatherPageCubit.new,
+      )
+      ..registerFactory<CurrentWeatherCubit>(
+        CurrentWeatherCubit.new,
+      );
   }
 }
