@@ -29,35 +29,58 @@ class _CurrentWeatherPageViewState extends State<CurrentWeatherPageView> {
           }
 
           if (state is CurrentWeatherPageError) {
-            return const WAError();
+            return WAError(
+              onRefresh: context.read<CurrentWeatherPageCubit>().getLocations,
+            );
           }
 
           state as CurrentWeatherPageLoaded;
-          return RefreshIndicator(
-            onRefresh: context.read<CurrentWeatherPageCubit>().getLocations,
-            backgroundColor: Colors.amber,
-            color: Colors.white,
-            child: ListView.separated(
-              itemBuilder: (BuildContext context, int index) {
-                return InkWell(
-                  onTap: () => Get.to<void>(
-                    ForecastView(
-                      location: state.locations[index],
+          return Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(8),
+                child: SearchBar(
+                  hintText: 'Search',
+                  hintStyle: const MaterialStatePropertyAll(
+                    TextStyle(
+                      color: Colors.black45,
                     ),
                   ),
-                  child: CurrentWeatherView(
-                    location: state.locations[index],
-                  ),
-                );
-              },
-              separatorBuilder: (BuildContext context, int index) =>
-                  const Divider(
-                height: 1,
-                thickness: 1,
-                color: Colors.transparent,
+                  onSubmitted: (String value) => context
+                      .read<CurrentWeatherPageCubit>()
+                      .searchLocation(query: value),
+                ),
               ),
-              itemCount: state.locations.length,
-            ),
+              Flexible(
+                child: RefreshIndicator(
+                  onRefresh:
+                      context.read<CurrentWeatherPageCubit>().getLocations,
+                  backgroundColor: Colors.amber,
+                  color: Colors.white,
+                  child: ListView.separated(
+                    itemBuilder: (BuildContext context, int index) {
+                      return InkWell(
+                        onTap: () => Get.to<void>(
+                          () => ForecastView(
+                            location: state.locations[index],
+                          ),
+                        ),
+                        child: CurrentWeatherView(
+                          location: state.locations[index],
+                        ),
+                      );
+                    },
+                    separatorBuilder: (BuildContext context, int index) =>
+                        const Divider(
+                      height: 1,
+                      thickness: 1,
+                      color: Colors.transparent,
+                    ),
+                    itemCount: state.locations.length,
+                  ),
+                ),
+              ),
+            ],
           );
         },
       ),

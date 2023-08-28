@@ -1,4 +1,5 @@
 // 🐦 Flutter imports:
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
@@ -58,23 +59,134 @@ class _ForecastViewState extends State<_ForecastView> {
           }
 
           if (state is ForecastError) {
-            return const WAError();
+            return WAError(
+              onRefresh: () => context
+                  .read<ForecastCubit>()
+                  .getForecast(location: widget.location),
+            );
           }
 
           state as ForecastLoaded;
-          return DecoratedBox(
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(8),
-            ),
-            child: const Row(
-              children: [
-                Placeholder(
-                  fallbackWidth: 30,
-                  fallbackHeight: 30,
-                ),
-              ],
-            ),
+          return GridView.count(
+            crossAxisCount: 2,
+            shrinkWrap: true,
+            children: state.forecast.map(
+              (forecast) {
+                final date = DateTime.parse(forecast.date);
+                return Padding(
+                  padding: const EdgeInsets.all(8),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      Text(
+                        '${date.month}/${date.day} - ${date.hour}h',
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      Flexible(
+                        child: DecoratedBox(
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8),
+                            child: Stack(
+                              children: [
+                                Center(
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      CachedNetworkImage(
+                                        imageUrl:
+                                            'https://openweathermap.org/img/wn/${forecast.icon}@2x.png',
+                                        fit: BoxFit.cover,
+                                        width: 64,
+                                        height: 64,
+                                        placeholder: (context, url) =>
+                                            const Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            SizedBox(
+                                              height: 64,
+                                              width: 64,
+                                              child: CircularProgressIndicator(
+                                                strokeWidth: 2,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      Text(
+                                        forecast.main,
+                                        style: const TextStyle(
+                                          color: Colors.black38,
+                                          fontSize: 10,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Column(
+                                      mainAxisAlignment: MainAxisAlignment.end,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          '${forecast.temperature.toInt()}°',
+                                          style: const TextStyle(
+                                            color: Colors.black45,
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                        Row(
+                                          children: [
+                                            Text(
+                                              'Min: ${forecast.minTemperature.toInt()}°',
+                                              style: const TextStyle(
+                                                color: Colors.black45,
+                                                fontSize: 10,
+                                              ),
+                                            ),
+                                            const SizedBox(
+                                              width: 8,
+                                            ),
+                                            Text(
+                                              'Max: ${forecast.maxTemperature.toInt()}°',
+                                              style: const TextStyle(
+                                                color: Colors.black45,
+                                                fontSize: 10,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                );
+              },
+            ).toList(),
           );
         },
       ),

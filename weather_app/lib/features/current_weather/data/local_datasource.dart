@@ -27,7 +27,7 @@ class CurrentWeatherLocalDataSourceImpl
     required LocationModel location,
   }) async {
     final hiveBox = await _getHiveBox();
-    return hiveBox.get(location.name);
+    return hiveBox.get(location.name.trim().toLowerCase().hashCode);
   }
 
   @override
@@ -42,7 +42,7 @@ class CurrentWeatherLocalDataSourceImpl
     required CurrentWeatherModel weather,
   }) async {
     final hiveBox = await _getHiveBox();
-    await hiveBox.put(location.name, weather);
+    await hiveBox.put(location.name.trim().toLowerCase().hashCode, weather);
     return true;
   }
 }

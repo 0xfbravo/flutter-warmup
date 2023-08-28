@@ -2,7 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 class WAError extends StatelessWidget {
-  const WAError({super.key});
+  const WAError({
+    this.onRefresh,
+    super.key,
+  });
+
+  final VoidCallback? onRefresh;
 
   @override
   Widget build(BuildContext context) {
@@ -26,6 +31,17 @@ class WAError extends StatelessWidget {
             color: Colors.white,
           ),
         ),
+        if (onRefresh != null) ...[
+          const SizedBox(height: 8),
+          IconButton(
+            onPressed: onRefresh,
+            icon: const Icon(
+              Icons.refresh,
+              size: 48,
+            ),
+            color: Colors.white,
+          ),
+        ],
       ],
     );
   }
