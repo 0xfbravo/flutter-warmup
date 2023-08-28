@@ -1,5 +1,6 @@
 // 📦 Package imports:
 import 'package:hive/hive.dart';
+
 part 'saved_location_model.g.dart';
 
 @HiveType(typeId: 0)

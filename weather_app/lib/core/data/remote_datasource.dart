@@ -1,7 +1,9 @@
-// 🌎 Project imports:
+// 📦 Package imports:
 import 'package:dio/dio.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get_it/get_it.dart';
+
+// 🌎 Project imports:
 import 'package:weather_app/core/domain/model/saved_location_model.dart';
 
 abstract class CoreRemoteDataSource {
