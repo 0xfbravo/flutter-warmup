@@ -1,7 +1,10 @@
 // 🐦 Flutter imports:
 import 'package:flutter/material.dart';
+
 // 📦 Package imports:
 import 'package:get/get.dart';
+
+// 🌎 Project imports:
 import 'package:weather_app/splashscreen.dart';
 
 class WeatherApp extends StatefulWidget {

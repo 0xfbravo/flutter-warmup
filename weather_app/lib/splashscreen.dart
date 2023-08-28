@@ -1,7 +1,12 @@
+// 🐦 Flutter imports:
 import 'package:flutter/material.dart';
+
+// 📦 Package imports:
 import 'package:get/get.dart';
 import 'package:get_it/get_it.dart';
 import 'package:lottie/lottie.dart';
+
+// 🌎 Project imports:
 import 'package:weather_app/core/domain/usecases/search_location_usecase.dart';
 import 'package:weather_app/home.dart';
 

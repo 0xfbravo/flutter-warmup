@@ -1,8 +1,12 @@
 // 🐦 Flutter imports:
 import 'package:flutter/material.dart';
+
+// 📦 Package imports:
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:get_it/get_it.dart';
+
+// 🌎 Project imports:
 import 'package:weather_app/design_system/wa_error.dart';
 import 'package:weather_app/design_system/wa_loading.dart';
 import 'package:weather_app/features/current_weather/presentation/cubit.dart';

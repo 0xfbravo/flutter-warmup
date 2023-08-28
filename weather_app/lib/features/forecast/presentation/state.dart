@@ -1,3 +1,4 @@
+// 🌎 Project imports:
 import 'package:weather_app/features/forecast/domain/model/forecast_model.dart';
 
 abstract class ForecastState {}

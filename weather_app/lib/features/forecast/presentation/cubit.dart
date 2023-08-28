@@ -1,6 +1,9 @@
+// 📦 Package imports:
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:logger/logger.dart';
+
+// 🌎 Project imports:
 import 'package:weather_app/core/domain/model/location_model.dart';
 import 'package:weather_app/features/forecast/domain/usecases/get_forecast_usecase.dart';
 import 'package:weather_app/features/forecast/presentation/state.dart';

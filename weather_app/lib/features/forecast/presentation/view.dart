@@ -1,8 +1,12 @@
 // 🐦 Flutter imports:
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+
+// 📦 Package imports:
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
+
+// 🌎 Project imports:
 import 'package:weather_app/core/domain/model/location_model.dart';
 import 'package:weather_app/design_system/wa_error.dart';
 import 'package:weather_app/design_system/wa_loading.dart';

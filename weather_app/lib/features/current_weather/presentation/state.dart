@@ -1,3 +1,4 @@
+// 🌎 Project imports:
 import 'package:weather_app/core/domain/model/location_model.dart';
 
 abstract class CurrentWeatherPageState {}
