@@ -4,6 +4,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get_it/get_it.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:logger/logger.dart';
 
 // 🌎 Project imports:
 import 'package:weather_app/core/data/local_datasource.dart';
@@ -29,10 +30,27 @@ class CorePackage {
   CorePackage._();
 
   static Future<void> setup({required bool isTest}) async {
+    _setupLogger();
     await _setupHive(isTest: isTest);
     _setupDio();
     _setupData();
     _setupDomain();
+  }
+
+  static void _setupLogger() {
+    GetIt.I.registerSingleton(
+      Logger(
+        printer: PrettyPrinter(
+          methodCount: 2, // number of method calls to be displayed
+          errorMethodCount:
+              8, // number of method calls if stacktrace is provided
+          lineLength: 120, // width of the output
+          colors: true, // Colorful log messages
+          printEmojis: true, // Print an emoji for each log message
+          printTime: true, // Should each log print contain a timestamp
+        ),
+      ),
+    );
   }
 
   static Future<void> _setupHive({required bool isTest}) async {

@@ -7,6 +7,7 @@ import 'package:weather_app/features/forecast/data/remote_datasource.dart';
 import 'package:weather_app/features/forecast/data/repository.dart';
 import 'package:weather_app/features/forecast/domain/usecases/get_forecast_usecase.dart';
 import 'package:weather_app/features/forecast/presentation/cubit.dart';
+import 'package:weather_app/features/forecast/presentation/forecast_widget/cubit.dart';
 
 class ForecastPackage {
   ForecastPackage._();
@@ -37,8 +38,12 @@ class ForecastPackage {
   }
 
   static void _setupPresentation() {
-    GetIt.I.registerFactory<ForecastCubit>(
-      ForecastCubit.new,
-    );
+    GetIt.I
+      ..registerFactory<ForecastPageCubit>(
+        ForecastPageCubit.new,
+      )
+      ..registerFactory<ForecastCubit>(
+        ForecastCubit.new,
+      );
   }
 }
