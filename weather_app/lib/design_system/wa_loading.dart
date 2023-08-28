@@ -8,12 +8,16 @@ class WALoading extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisSize: MainAxisSize.max,
       children: [
-        SizedBox.square(
-          dimension: 80,
-          child: Lottie.asset(
-            'assets/sun_loading.json',
-            repeat: true,
+        Center(
+          child: SizedBox.square(
+            dimension: 80,
+            child: Lottie.asset(
+              'assets/sun_loading.json',
+              repeat: true,
+            ),
           ),
         ),
       ],

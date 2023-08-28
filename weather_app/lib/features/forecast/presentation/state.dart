@@ -1,13 +1,13 @@
-import 'package:weather_app/core/domain/model/location_model.dart';
+import 'package:weather_app/features/forecast/domain/model/forecast_model.dart';
 
-abstract class ForecastPageState {}
+abstract class ForecastState {}
 
-class ForecastPageLoading extends ForecastPageState {}
+class ForecastLoading extends ForecastState {}
 
-class ForecastPageError extends ForecastPageState {}
+class ForecastError extends ForecastState {}
 
-class ForecastPageLoaded extends ForecastPageState {
-  ForecastPageLoaded({required this.locations});
+class ForecastLoaded extends ForecastState {
+  ForecastLoaded({required this.forecast});
 
-  final List<LocationModel> locations;
+  final List<ForecastModel> forecast;
 }

@@ -8,11 +8,15 @@ class WAError extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisSize: MainAxisSize.max,
       children: [
-        SizedBox.square(
-          dimension: 120,
-          child: SvgPicture.asset(
-            'assets/error.svg',
+        Center(
+          child: SizedBox.square(
+            dimension: 120,
+            child: SvgPicture.asset(
+              'assets/error.svg',
+            ),
           ),
         ),
         const Text(

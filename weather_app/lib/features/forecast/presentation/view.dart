@@ -2,50 +2,79 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
+import 'package:weather_app/core/domain/model/location_model.dart';
 import 'package:weather_app/design_system/wa_error.dart';
 import 'package:weather_app/design_system/wa_loading.dart';
 import 'package:weather_app/features/forecast/presentation/cubit.dart';
-import 'package:weather_app/features/forecast/presentation/forecast_widget/view.dart';
 import 'package:weather_app/features/forecast/presentation/state.dart';
 
-class ForecastPageView extends StatefulWidget {
-  const ForecastPageView({super.key});
+class ForecastView extends StatelessWidget {
+  const ForecastView({
+    required this.location,
+    super.key,
+  });
 
-  @override
-  State<ForecastPageView> createState() => _ForecastPageViewState();
-}
+  final LocationModel location;
 
-class _ForecastPageViewState extends State<ForecastPageView> {
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<ForecastPageCubit>(
-      create: (_) => GetIt.I.get<ForecastPageCubit>(),
-      child: BlocBuilder<ForecastPageCubit, ForecastPageState>(
+    return BlocProvider<ForecastCubit>(
+      create: (_) => GetIt.I.get<ForecastCubit>(),
+      child: _ForecastView(
+        location: location,
+      ),
+    );
+  }
+}
+
+class _ForecastView extends StatefulWidget {
+  const _ForecastView({
+    required this.location,
+  });
+
+  final LocationModel location;
+
+  @override
+  State<_ForecastView> createState() => _ForecastViewState();
+}
+
+class _ForecastViewState extends State<_ForecastView> {
+  @override
+  void initState() {
+    context.read<ForecastCubit>().getForecast(location: widget.location);
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(widget.location.name),
+      ),
+      body: BlocBuilder<ForecastCubit, ForecastState>(
         builder: (context, state) {
-          if (state is ForecastPageLoading) {
+          if (state is ForecastLoading) {
             return const WALoading();
           }
 
-          if (state is ForecastPageError) {
+          if (state is ForecastError) {
             return const WAError();
           }
 
-          state as ForecastPageLoaded;
-          return ListView.separated(
-            itemBuilder: (BuildContext context, int index) {
-              return ForecastView(
-                location: state.locations[index],
-              );
-            },
-            separatorBuilder: (BuildContext context, int index) =>
-                const Divider(
-              indent: 8,
-              endIndent: 8,
-              height: 30,
-              thickness: 0.1,
-              color: Colors.black12,
+          state as ForecastLoaded;
+          return DecoratedBox(
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(8),
             ),
-            itemCount: state.locations.length,
+            child: const Row(
+              children: [
+                Placeholder(
+                  fallbackWidth: 30,
+                  fallbackHeight: 30,
+                ),
+              ],
+            ),
           );
         },
       ),

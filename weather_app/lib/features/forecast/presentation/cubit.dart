@@ -1,21 +1,25 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
-import 'package:weather_app/core/domain/usecases/get_locations_usecase.dart';
+import 'package:logger/logger.dart';
+import 'package:weather_app/core/domain/model/location_model.dart';
+import 'package:weather_app/features/forecast/domain/usecases/get_forecast_usecase.dart';
 import 'package:weather_app/features/forecast/presentation/state.dart';
 
-class ForecastPageCubit extends Cubit<ForecastPageState> {
-  ForecastPageCubit() : super(ForecastPageLoading()) {
-    getLocations();
-  }
+class ForecastCubit extends Cubit<ForecastState> {
+  ForecastCubit() : super(ForecastLoading());
 
-  Future<void> getLocations() async {
-    final getLocationsUseCase = GetIt.I.get<GetLocationsUseCase>();
-    emit(ForecastPageLoading());
+  Future<void> getForecast({
+    required LocationModel location,
+  }) async {
+    final getForecaseUseCase = GetIt.I.get<GetForecastUseCase>();
+    emit(ForecastLoading());
+
     try {
-      final locations = await getLocationsUseCase();
-      emit(ForecastPageLoaded(locations: locations));
+      final forecast = await getForecaseUseCase(location: location);
+      emit(ForecastLoaded(forecast: forecast));
     } catch (e) {
-      emit(ForecastPageError());
+      GetIt.I<Logger>().e(e.toString(), e);
+      emit(ForecastError());
     }
   }
 }
