@@ -48,14 +48,14 @@ class CurrentWeatherModel {
   final double maxTemperature;
 
   @HiveField(9)
-  final double pressure;
+  final int? pressure;
 
   @HiveField(10)
-  final double humidity;
+  final int? humidity;
 
   @HiveField(11)
-  final double? seaLevel;
+  final int? seaLevel;
 
   @HiveField(12)
-  final double? groundLevel;
+  final int? groundLevel;
 }

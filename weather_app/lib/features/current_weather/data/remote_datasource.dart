@@ -42,8 +42,10 @@ class CurrentWeatherRemoteDataSourceImpl
       feelsLike: data['main']['feels_like']! as double,
       minTemperature: data['main']['temp_min']! as double,
       maxTemperature: data['main']['temp_max']! as double,
-      pressure: data['main']['pressure'] as double,
-      humidity: data['main']['humidity'] as double,
+      pressure: data['main']['pressure'] as int?,
+      humidity: data['main']['humidity'] as int?,
+      seaLevel: data['main']['sea_level'] as int?,
+      groundLevel: data['main']['grnd_level'] as int?,
     );
   }
 }

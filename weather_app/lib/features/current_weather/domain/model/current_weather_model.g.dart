@@ -26,10 +26,10 @@ class CurrentWeatherModelAdapter extends TypeAdapter<CurrentWeatherModel> {
       feelsLike: fields[6] as double,
       minTemperature: fields[7] as double,
       maxTemperature: fields[8] as double,
-      pressure: fields[9] as double,
-      humidity: fields[10] as double,
-      seaLevel: fields[11] as double?,
-      groundLevel: fields[12] as double?,
+      pressure: fields[9] as int?,
+      humidity: fields[10] as int?,
+      seaLevel: fields[11] as int?,
+      groundLevel: fields[12] as int?,
     );
   }
 
