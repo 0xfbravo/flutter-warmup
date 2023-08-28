@@ -7,7 +7,7 @@ import 'dart:async' as _i3;
 
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:weather_app/core/data/local_datasource.dart' as _i2;
-import 'package:weather_app/core/domain/model/saved_location_model.dart' as _i4;
+import 'package:weather_app/core/domain/model/location_model.dart' as _i4;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -26,32 +26,30 @@ import 'package:weather_app/core/domain/model/saved_location_model.dart' as _i4;
 class MockCoreLocalDataSource extends _i1.Mock
     implements _i2.CoreLocalDataSource {
   @override
-  _i3.Future<_i4.SavedLocationModel?> hasCachedLocation(
-          {required String? query}) =>
+  _i3.Future<_i4.LocationModel?> hasCachedLocation({required String? query}) =>
       (super.noSuchMethod(
         Invocation.method(
           #hasCachedLocation,
           [],
           {#query: query},
         ),
-        returnValue: _i3.Future<_i4.SavedLocationModel?>.value(),
-        returnValueForMissingStub: _i3.Future<_i4.SavedLocationModel?>.value(),
-      ) as _i3.Future<_i4.SavedLocationModel?>);
+        returnValue: _i3.Future<_i4.LocationModel?>.value(),
+        returnValueForMissingStub: _i3.Future<_i4.LocationModel?>.value(),
+      ) as _i3.Future<_i4.LocationModel?>);
   @override
-  _i3.Future<List<_i4.SavedLocationModel>> getSavedLocations() =>
+  _i3.Future<List<_i4.LocationModel>> getSavedLocations() =>
       (super.noSuchMethod(
         Invocation.method(
           #getSavedLocations,
           [],
         ),
-        returnValue: _i3.Future<List<_i4.SavedLocationModel>>.value(
-            <_i4.SavedLocationModel>[]),
+        returnValue:
+            _i3.Future<List<_i4.LocationModel>>.value(<_i4.LocationModel>[]),
         returnValueForMissingStub:
-            _i3.Future<List<_i4.SavedLocationModel>>.value(
-                <_i4.SavedLocationModel>[]),
-      ) as _i3.Future<List<_i4.SavedLocationModel>>);
+            _i3.Future<List<_i4.LocationModel>>.value(<_i4.LocationModel>[]),
+      ) as _i3.Future<List<_i4.LocationModel>>);
   @override
-  _i3.Future<bool> saveLocation({required _i4.SavedLocationModel? location}) =>
+  _i3.Future<bool> saveLocation({required _i4.LocationModel? location}) =>
       (super.noSuchMethod(
         Invocation.method(
           #saveLocation,

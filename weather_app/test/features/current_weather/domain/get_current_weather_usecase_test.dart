@@ -6,7 +6,7 @@ import 'package:hive/hive.dart';
 
 // 🌎 Project imports:
 import 'package:weather_app/core/dependency_injection.dart';
-import 'package:weather_app/core/domain/model/saved_location_model.dart';
+import 'package:weather_app/core/domain/model/location_model.dart';
 import 'package:weather_app/features/current_weather/domain/usecases/get_current_weather_usecase.dart';
 
 void main() {
@@ -29,7 +29,7 @@ void main() {
 
       expect(
         () => useCase(
-          savedLocationModel: SavedLocationModel(
+          location: LocationModel(
             name: 'Abubleblé das ideias',
             lat: double.maxFinite,
             lon: double.maxFinite,
@@ -47,7 +47,7 @@ void main() {
 
         // From remote
         await useCase(
-          savedLocationModel: SavedLocationModel(
+          location: LocationModel(
             name: 'Monte Carlo, Monaco',
             lat: 43.7402961,
             lon: 7.426559,
@@ -59,7 +59,7 @@ void main() {
 
         // From cache
         await useCase(
-          savedLocationModel: SavedLocationModel(
+          location: LocationModel(
             name: 'Monte Carlo, Monaco',
             lat: 43.7402961,
             lon: 7.426559,

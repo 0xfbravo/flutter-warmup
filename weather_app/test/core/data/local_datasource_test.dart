@@ -9,7 +9,7 @@ import 'package:mockito/mockito.dart';
 // 🌎 Project imports:
 import 'package:weather_app/core/data/local_datasource.dart';
 import 'package:weather_app/core/dependency_injection.dart';
-import 'package:weather_app/core/domain/model/saved_location_model.dart';
+import 'package:weather_app/core/domain/model/location_model.dart';
 import 'local_datasource_test.mocks.dart';
 
 @GenerateNiceMocks([MockSpec<CoreLocalDataSource>()])
@@ -55,8 +55,7 @@ void main() {
       test('it should return a cached location', () {
         final mock = MockCoreLocalDataSource();
         when(mock.hasCachedLocation(query: query)).thenAnswer(
-          (_) async =>
-              SavedLocationModel(name: 'Mock Location', lat: 0, lon: 0),
+          (_) async => LocationModel(name: 'Mock Location', lat: 0, lon: 0),
         );
         mock.hasCachedLocation(query: query).then((value) {
           expect(value, isNotNull);
@@ -101,7 +100,7 @@ void main() {
         final mock = MockCoreLocalDataSource();
         when(mock.getSavedLocations()).thenAnswer(
           (_) async => [
-            SavedLocationModel(name: 'Mock Location', lat: 0, lon: 0),
+            LocationModel(name: 'Mock Location', lat: 0, lon: 0),
           ],
         );
         mock.getSavedLocations().then((value) => expect(value, isNotEmpty));
@@ -109,8 +108,7 @@ void main() {
     });
 
     group('saveLocation', () {
-      final mockLocation =
-          SavedLocationModel(name: 'Mock Location', lat: 0, lon: 0);
+      final mockLocation = LocationModel(name: 'Mock Location', lat: 0, lon: 0);
 
       setUp(() async {
         await dotenv.load(fileName: '.env');

@@ -1,11 +1,11 @@
 // 📦 Package imports:
 import 'package:hive/hive.dart';
 
-part 'saved_location_model.g.dart';
+part 'location_model.g.dart';
 
 @HiveType(typeId: 0)
-class SavedLocationModel extends HiveObject {
-  SavedLocationModel({
+class LocationModel extends HiveObject {
+  LocationModel({
     required this.name,
     required this.lat,
     required this.lon,

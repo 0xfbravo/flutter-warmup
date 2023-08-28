@@ -2,25 +2,25 @@
 import 'package:hive/hive.dart';
 
 // 🌎 Project imports:
-import 'package:weather_app/core/domain/model/saved_location_model.dart';
+import 'package:weather_app/core/domain/model/location_model.dart';
 
 abstract class CoreLocalDataSource {
-  Future<SavedLocationModel?> hasCachedLocation({
+  Future<LocationModel?> hasCachedLocation({
     required String query,
   });
-  Future<List<SavedLocationModel>> getSavedLocations();
+  Future<List<LocationModel>> getSavedLocations();
   Future<bool> saveLocation({
-    required SavedLocationModel location,
+    required LocationModel location,
   });
 }
 
 class CoreLocalDataSourceImpl implements CoreLocalDataSource {
-  Future<Box<SavedLocationModel>> _getHiveBox() async {
-    return Hive.openBox<SavedLocationModel>('saved_locations');
+  Future<Box<LocationModel>> _getHiveBox() async {
+    return Hive.openBox<LocationModel>('saved_locations');
   }
 
   @override
-  Future<SavedLocationModel?> hasCachedLocation({
+  Future<LocationModel?> hasCachedLocation({
     required String query,
   }) async {
     final hiveBox = await _getHiveBox();
@@ -28,14 +28,14 @@ class CoreLocalDataSourceImpl implements CoreLocalDataSource {
   }
 
   @override
-  Future<List<SavedLocationModel>> getSavedLocations() async {
+  Future<List<LocationModel>> getSavedLocations() async {
     final hiveBox = await _getHiveBox();
     return hiveBox.values.toList();
   }
 
   @override
   Future<bool> saveLocation({
-    required SavedLocationModel location,
+    required LocationModel location,
   }) async {
     final hiveBox = await _getHiveBox();
     await hiveBox.put(location.name, location);

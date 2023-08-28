@@ -8,7 +8,7 @@ import 'package:mockito/mockito.dart';
 
 // 🌎 Project imports:
 import 'package:weather_app/core/dependency_injection.dart';
-import 'package:weather_app/core/domain/model/saved_location_model.dart';
+import 'package:weather_app/core/domain/model/location_model.dart';
 import 'package:weather_app/features/current_weather/data/remote_datasource.dart';
 import 'package:weather_app/features/current_weather/domain/model/current_weather_model.dart';
 import 'remote_datasource_test.mocks.dart';
@@ -17,7 +17,7 @@ import 'remote_datasource_test.mocks.dart';
 void main() {
   group('[Feature/Current Weather] Remote Datasource', () {
     group('getCurrentWeather', () {
-      final mockLocation = SavedLocationModel(
+      final mockLocation = LocationModel(
         name: 'Monte Carlo, Monaco',
         lat: 43.7402961,
         lon: 7.426559,
@@ -37,18 +37,17 @@ void main() {
 
       test('it should return an error', () {
         final mock = MockCurrentWeatherRemoteDataSource();
-        when(mock.getCurrentWeather(savedLocationModel: mockLocation))
+        when(mock.getCurrentWeather(location: mockLocation))
             .thenThrow(Exception('Something went wrong'));
         expect(
-          () => mock.getCurrentWeather(savedLocationModel: mockLocation),
+          () => mock.getCurrentWeather(location: mockLocation),
           throwsException,
         );
       });
 
       test('it should return a value', () {
         final mock = MockCurrentWeatherRemoteDataSource();
-        when(mock.getCurrentWeather(savedLocationModel: mockLocation))
-            .thenAnswer(
+        when(mock.getCurrentWeather(location: mockLocation)).thenAnswer(
           (_) async => CurrentWeatherModel(
             latitude: 0,
             longitude: 0,
@@ -65,7 +64,7 @@ void main() {
             groundLevel: 0,
           ),
         );
-        mock.getCurrentWeather(savedLocationModel: mockLocation).then((value) {
+        mock.getCurrentWeather(location: mockLocation).then((value) {
           expect(value, isNotNull);
           expect(value.description, isNotEmpty);
         });
@@ -75,7 +74,7 @@ void main() {
         await setupDependencyInjection();
         final datasource = GetIt.I<CurrentWeatherRemoteDataSource>();
         await datasource
-            .getCurrentWeather(savedLocationModel: mockLocation)
+            .getCurrentWeather(location: mockLocation)
             .then((value) {
           expect(value, isNotNull);
           expect(value.description, isNotEmpty);
@@ -87,7 +86,7 @@ void main() {
         final datasource = GetIt.I<CurrentWeatherRemoteDataSource>();
         expect(
           () => datasource.getCurrentWeather(
-            savedLocationModel: SavedLocationModel(
+            location: LocationModel(
               name: 'Abubleblé das Ideias',
               lat: double.maxFinite,
               lon: double.maxFinite,

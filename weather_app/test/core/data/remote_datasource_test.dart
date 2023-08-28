@@ -9,7 +9,7 @@ import 'package:mockito/mockito.dart';
 // 🌎 Project imports:
 import 'package:weather_app/core/data/remote_datasource.dart';
 import 'package:weather_app/core/dependency_injection.dart';
-import 'package:weather_app/core/domain/model/saved_location_model.dart';
+import 'package:weather_app/core/domain/model/location_model.dart';
 import 'remote_datasource_test.mocks.dart';
 
 @GenerateNiceMocks([MockSpec<CoreRemoteDataSource>()])
@@ -40,8 +40,7 @@ void main() {
       test('it should return a value', () {
         final mock = MockCoreRemoteDataSource();
         when(mock.searchLocation(query: query)).thenAnswer(
-          (_) async =>
-              SavedLocationModel(name: 'Mock Location', lat: 0, lon: 0),
+          (_) async => LocationModel(name: 'Mock Location', lat: 0, lon: 0),
         );
         mock.searchLocation(query: query).then((value) {
           expect(value, isNotNull);

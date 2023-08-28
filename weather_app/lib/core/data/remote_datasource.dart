@@ -4,17 +4,17 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get_it/get_it.dart';
 
 // 🌎 Project imports:
-import 'package:weather_app/core/domain/model/saved_location_model.dart';
+import 'package:weather_app/core/domain/model/location_model.dart';
 
 abstract class CoreRemoteDataSource {
-  Future<SavedLocationModel> searchLocation({
+  Future<LocationModel> searchLocation({
     required String query,
   });
 }
 
 class CoreRemoteDataSourceImpl implements CoreRemoteDataSource {
   @override
-  Future<SavedLocationModel> searchLocation({
+  Future<LocationModel> searchLocation({
     required String query,
   }) async {
     final dio = GetIt.I<Dio>();
@@ -32,7 +32,7 @@ class CoreRemoteDataSourceImpl implements CoreRemoteDataSource {
       throw Exception('No data found for query: $query');
     }
 
-    return SavedLocationModel(
+    return LocationModel(
       name: query,
       lat: data.first['lat']! as double,
       lon: data.first['lon']! as double,

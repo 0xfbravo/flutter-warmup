@@ -2,13 +2,13 @@
 import 'package:get_it/get_it.dart';
 
 // 🌎 Project imports:
-import 'package:weather_app/core/domain/model/saved_location_model.dart';
+import 'package:weather_app/core/domain/model/location_model.dart';
 import 'package:weather_app/features/current_weather/data/repository.dart';
 import 'package:weather_app/features/current_weather/domain/model/current_weather_model.dart';
 
 abstract class GetCurrentWeatherUseCase {
   Future<CurrentWeatherModel> call({
-    required SavedLocationModel savedLocationModel,
+    required LocationModel location,
   });
 }
 
@@ -17,10 +17,10 @@ class GetCurrentWeatherUseCaseImpl implements GetCurrentWeatherUseCase {
 
   @override
   Future<CurrentWeatherModel> call({
-    required SavedLocationModel savedLocationModel,
+    required LocationModel location,
   }) async {
     return _repository.getCurrentWeather(
-      savedLocationModel: savedLocationModel,
+      location: location,
     );
   }
 }

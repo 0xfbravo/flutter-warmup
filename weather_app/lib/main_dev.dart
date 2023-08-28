@@ -11,7 +11,7 @@ import 'package:weather_app/core/dependency_injection.dart';
 void main() async {
   final _ = WidgetsFlutterBinding.ensureInitialized();
 
-  /// Keep in mind FlutterConfig doesn't obfuscate
+  /// Keep in mind FlutterConfig/DotEnv doesn't obfuscate
   /// the values, so it's not recommended to use it for sensitive data.
   /// But it's a good option for development.
   /// These keys should be stored on a secure storage, like for example

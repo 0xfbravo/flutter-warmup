@@ -6,7 +6,7 @@
 import 'dart:async' as _i3;
 
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:weather_app/core/domain/model/saved_location_model.dart' as _i5;
+import 'package:weather_app/core/domain/model/location_model.dart' as _i5;
 import 'package:weather_app/features/current_weather/data/local_datasource.dart'
     as _i2;
 import 'package:weather_app/features/current_weather/domain/model/current_weather_model.dart'
@@ -30,12 +30,12 @@ class MockCurrentWeatherLocalDataSource extends _i1.Mock
     implements _i2.CurrentWeatherLocalDataSource {
   @override
   _i3.Future<_i4.CurrentWeatherModel?> hasCachedWeather(
-          {required _i5.SavedLocationModel? savedLocationModel}) =>
+          {required _i5.LocationModel? location}) =>
       (super.noSuchMethod(
         Invocation.method(
           #hasCachedWeather,
           [],
-          {#savedLocationModel: savedLocationModel},
+          {#location: location},
         ),
         returnValue: _i3.Future<_i4.CurrentWeatherModel?>.value(),
         returnValueForMissingStub: _i3.Future<_i4.CurrentWeatherModel?>.value(),
@@ -55,7 +55,7 @@ class MockCurrentWeatherLocalDataSource extends _i1.Mock
       ) as _i3.Future<List<_i4.CurrentWeatherModel>>);
   @override
   _i3.Future<bool> saveWeather({
-    required _i5.SavedLocationModel? location,
+    required _i5.LocationModel? location,
     required _i4.CurrentWeatherModel? weather,
   }) =>
       (super.noSuchMethod(

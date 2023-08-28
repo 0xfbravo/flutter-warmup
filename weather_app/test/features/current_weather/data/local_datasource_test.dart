@@ -8,7 +8,7 @@ import 'package:mockito/mockito.dart';
 
 // 🌎 Project imports:
 import 'package:weather_app/core/dependency_injection.dart';
-import 'package:weather_app/core/domain/model/saved_location_model.dart';
+import 'package:weather_app/core/domain/model/location_model.dart';
 import 'package:weather_app/features/current_weather/data/local_datasource.dart';
 import 'package:weather_app/features/current_weather/domain/model/current_weather_model.dart';
 import 'local_datasource_test.mocks.dart';
@@ -17,8 +17,7 @@ import 'local_datasource_test.mocks.dart';
 void main() {
   group('[Feature/Current Weather] Local Datasource', () {
     group('hasCachedWeather', () {
-      final mockLocation =
-          SavedLocationModel(name: 'Mock Location', lat: 0, lon: 0);
+      final mockLocation = LocationModel(name: 'Mock Location', lat: 0, lon: 0);
       final mockWeather = CurrentWeatherModel(
         latitude: 0,
         longitude: 0,
@@ -49,34 +48,34 @@ void main() {
 
       test('it should return nulll (no cached weather)', () async {
         final mock = MockCurrentWeatherLocalDataSource();
-        when(mock.hasCachedWeather(savedLocationModel: mockLocation))
+        when(mock.hasCachedWeather(location: mockLocation))
             .thenAnswer((_) async => null);
         await mock
-            .hasCachedWeather(savedLocationModel: mockLocation)
+            .hasCachedWeather(location: mockLocation)
             .then((value) => expect(value, isNull));
 
         await setupDependencyInjection();
         final datasource = GetIt.I<CurrentWeatherLocalDataSource>();
         await datasource
-            .hasCachedWeather(savedLocationModel: mockLocation)
+            .hasCachedWeather(location: mockLocation)
             .then((value) => expect(value, isNull));
       });
 
       test('it should return an error', () {
         final mock = MockCurrentWeatherLocalDataSource();
-        when(mock.hasCachedWeather(savedLocationModel: mockLocation))
+        when(mock.hasCachedWeather(location: mockLocation))
             .thenThrow(Exception('Something went wrong'));
         expect(
-          () => mock.hasCachedWeather(savedLocationModel: mockLocation),
+          () => mock.hasCachedWeather(location: mockLocation),
           throwsException,
         );
       });
 
       test('it should return a cached weather', () {
         final mock = MockCurrentWeatherLocalDataSource();
-        when(mock.hasCachedWeather(savedLocationModel: mockLocation))
+        when(mock.hasCachedWeather(location: mockLocation))
             .thenAnswer((_) async => mockWeather);
-        mock.hasCachedWeather(savedLocationModel: mockLocation).then((value) {
+        mock.hasCachedWeather(location: mockLocation).then((value) {
           expect(value, isNotNull);
           expect(value!.description, isNotEmpty);
         });
@@ -141,8 +140,7 @@ void main() {
     });
 
     group('saveWeather', () {
-      final mockLocation =
-          SavedLocationModel(name: 'Mock Location', lat: 0, lon: 0);
+      final mockLocation = LocationModel(name: 'Mock Location', lat: 0, lon: 0);
       final mockWeather = CurrentWeatherModel(
         latitude: 0,
         longitude: 0,

@@ -10,7 +10,7 @@ import 'package:mockito/mockito.dart';
 import 'package:weather_app/core/data/local_datasource.dart';
 import 'package:weather_app/core/data/remote_datasource.dart';
 import 'package:weather_app/core/data/repository.dart';
-import 'package:weather_app/core/domain/model/saved_location_model.dart';
+import 'package:weather_app/core/domain/model/location_model.dart';
 import 'local_datasource_test.mocks.dart';
 import 'remote_datasource_test.mocks.dart';
 
@@ -57,7 +57,7 @@ void main() {
       test('it should return a valid list', () {
         when(localDataSource.getSavedLocations()).thenAnswer(
           (_) async => [
-            SavedLocationModel(name: 'Mock Location', lat: 0, lon: 0),
+            LocationModel(name: 'Mock Location', lat: 0, lon: 0),
           ],
         );
         GetIt.I.registerFactory<CoreLocalDataSource>(() => localDataSource);
@@ -97,8 +97,7 @@ void main() {
 
       test('it should return a value from server', () {
         when(remoteDataSource.searchLocation(query: query)).thenAnswer(
-          (_) async =>
-              SavedLocationModel(name: 'Mock Location', lat: 0, lon: 0),
+          (_) async => LocationModel(name: 'Mock Location', lat: 0, lon: 0),
         );
         GetIt.I.registerFactory<CoreLocalDataSource>(() => localDataSource);
         GetIt.I.registerFactory<CoreRemoteDataSource>(() => remoteDataSource);
@@ -112,8 +111,7 @@ void main() {
 
       test('it should return a value from cache', () {
         when(localDataSource.hasCachedLocation(query: query)).thenAnswer(
-          (_) async =>
-              SavedLocationModel(name: 'Mock Location', lat: 0, lon: 0),
+          (_) async => LocationModel(name: 'Mock Location', lat: 0, lon: 0),
         );
         GetIt.I.registerFactory<CoreLocalDataSource>(() => localDataSource);
         GetIt.I.registerFactory<CoreRemoteDataSource>(() => remoteDataSource);

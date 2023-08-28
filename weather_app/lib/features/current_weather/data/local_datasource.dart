@@ -2,16 +2,16 @@
 import 'package:hive/hive.dart';
 
 // 🌎 Project imports:
-import 'package:weather_app/core/domain/model/saved_location_model.dart';
+import 'package:weather_app/core/domain/model/location_model.dart';
 import 'package:weather_app/features/current_weather/domain/model/current_weather_model.dart';
 
 abstract class CurrentWeatherLocalDataSource {
   Future<CurrentWeatherModel?> hasCachedWeather({
-    required SavedLocationModel savedLocationModel,
+    required LocationModel location,
   });
   Future<List<CurrentWeatherModel>> getSavedWeathers();
   Future<bool> saveWeather({
-    required SavedLocationModel location,
+    required LocationModel location,
     required CurrentWeatherModel weather,
   });
 }
@@ -24,10 +24,10 @@ class CurrentWeatherLocalDataSourceImpl
 
   @override
   Future<CurrentWeatherModel?> hasCachedWeather({
-    required SavedLocationModel savedLocationModel,
+    required LocationModel location,
   }) async {
     final hiveBox = await _getHiveBox();
-    return hiveBox.get(savedLocationModel.name);
+    return hiveBox.get(location.name);
   }
 
   @override
@@ -38,7 +38,7 @@ class CurrentWeatherLocalDataSourceImpl
 
   @override
   Future<bool> saveWeather({
-    required SavedLocationModel location,
+    required LocationModel location,
     required CurrentWeatherModel weather,
   }) async {
     final hiveBox = await _getHiveBox();

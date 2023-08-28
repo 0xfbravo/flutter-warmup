@@ -7,7 +7,7 @@ import 'dart:async' as _i4;
 
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:weather_app/core/data/repository.dart' as _i3;
-import 'package:weather_app/core/domain/model/saved_location_model.dart' as _i2;
+import 'package:weather_app/core/domain/model/location_model.dart' as _i2;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -20,9 +20,8 @@ import 'package:weather_app/core/domain/model/saved_location_model.dart' as _i2;
 // ignore_for_file: camel_case_types
 // ignore_for_file: subtype_of_sealed_class
 
-class _FakeSavedLocationModel_0 extends _i1.SmartFake
-    implements _i2.SavedLocationModel {
-  _FakeSavedLocationModel_0(
+class _FakeLocationModel_0 extends _i1.SmartFake implements _i2.LocationModel {
+  _FakeLocationModel_0(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -36,28 +35,26 @@ class _FakeSavedLocationModel_0 extends _i1.SmartFake
 /// See the documentation for Mockito's code generation for more information.
 class MockCoreRepository extends _i1.Mock implements _i3.CoreRepository {
   @override
-  _i4.Future<List<_i2.SavedLocationModel>> getSavedLocations() =>
+  _i4.Future<List<_i2.LocationModel>> getSavedLocations() =>
       (super.noSuchMethod(
         Invocation.method(
           #getSavedLocations,
           [],
         ),
-        returnValue: _i4.Future<List<_i2.SavedLocationModel>>.value(
-            <_i2.SavedLocationModel>[]),
+        returnValue:
+            _i4.Future<List<_i2.LocationModel>>.value(<_i2.LocationModel>[]),
         returnValueForMissingStub:
-            _i4.Future<List<_i2.SavedLocationModel>>.value(
-                <_i2.SavedLocationModel>[]),
-      ) as _i4.Future<List<_i2.SavedLocationModel>>);
+            _i4.Future<List<_i2.LocationModel>>.value(<_i2.LocationModel>[]),
+      ) as _i4.Future<List<_i2.LocationModel>>);
   @override
-  _i4.Future<_i2.SavedLocationModel> searchLocation({required String? query}) =>
+  _i4.Future<_i2.LocationModel> searchLocation({required String? query}) =>
       (super.noSuchMethod(
         Invocation.method(
           #searchLocation,
           [],
           {#query: query},
         ),
-        returnValue:
-            _i4.Future<_i2.SavedLocationModel>.value(_FakeSavedLocationModel_0(
+        returnValue: _i4.Future<_i2.LocationModel>.value(_FakeLocationModel_0(
           this,
           Invocation.method(
             #searchLocation,
@@ -66,7 +63,7 @@ class MockCoreRepository extends _i1.Mock implements _i3.CoreRepository {
           ),
         )),
         returnValueForMissingStub:
-            _i4.Future<_i2.SavedLocationModel>.value(_FakeSavedLocationModel_0(
+            _i4.Future<_i2.LocationModel>.value(_FakeLocationModel_0(
           this,
           Invocation.method(
             #searchLocation,
@@ -74,5 +71,5 @@ class MockCoreRepository extends _i1.Mock implements _i3.CoreRepository {
             {#query: query},
           ),
         )),
-      ) as _i4.Future<_i2.SavedLocationModel>);
+      ) as _i4.Future<_i2.LocationModel>);
 }

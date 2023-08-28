@@ -6,7 +6,7 @@
 import 'dart:async' as _i4;
 
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:weather_app/core/domain/model/saved_location_model.dart' as _i5;
+import 'package:weather_app/core/domain/model/location_model.dart' as _i5;
 import 'package:weather_app/features/current_weather/data/repository.dart'
     as _i3;
 import 'package:weather_app/features/current_weather/domain/model/current_weather_model.dart'
@@ -41,12 +41,12 @@ class MockCurrentWeatherRepository extends _i1.Mock
     implements _i3.CurrentWeatherRepository {
   @override
   _i4.Future<_i2.CurrentWeatherModel> getCurrentWeather(
-          {required _i5.SavedLocationModel? savedLocationModel}) =>
+          {required _i5.LocationModel? location}) =>
       (super.noSuchMethod(
         Invocation.method(
           #getCurrentWeather,
           [],
-          {#savedLocationModel: savedLocationModel},
+          {#location: location},
         ),
         returnValue: _i4.Future<_i2.CurrentWeatherModel>.value(
             _FakeCurrentWeatherModel_0(
@@ -54,7 +54,7 @@ class MockCurrentWeatherRepository extends _i1.Mock
           Invocation.method(
             #getCurrentWeather,
             [],
-            {#savedLocationModel: savedLocationModel},
+            {#location: location},
           ),
         )),
         returnValueForMissingStub: _i4.Future<_i2.CurrentWeatherModel>.value(
@@ -63,7 +63,7 @@ class MockCurrentWeatherRepository extends _i1.Mock
           Invocation.method(
             #getCurrentWeather,
             [],
-            {#savedLocationModel: savedLocationModel},
+            {#location: location},
           ),
         )),
       ) as _i4.Future<_i2.CurrentWeatherModel>);

@@ -7,7 +7,7 @@ import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
 // 🌎 Project imports:
-import 'package:weather_app/core/domain/model/saved_location_model.dart';
+import 'package:weather_app/core/domain/model/location_model.dart';
 import 'package:weather_app/features/current_weather/data/local_datasource.dart';
 import 'package:weather_app/features/current_weather/data/remote_datasource.dart';
 import 'package:weather_app/features/current_weather/data/repository.dart';
@@ -24,7 +24,7 @@ void main() {
 
   group('[Feature/Current Weather] Repository', () {
     group('getCurrentWeather', () {
-      final mockLocation = SavedLocationModel(
+      final mockLocation = LocationModel(
         name: 'Monte Carlo, Monaco',
         lat: 43.7402961,
         lon: 7.426559,
@@ -45,7 +45,7 @@ void main() {
       test('it should return an error', () {
         when(
           remoteDataSource.getCurrentWeather(
-            savedLocationModel: mockLocation,
+            location: mockLocation,
           ),
         ).thenThrow(Exception('Something went wrong'));
         GetIt.I.registerFactory<CurrentWeatherLocalDataSource>(
@@ -57,7 +57,7 @@ void main() {
 
         final repository = CurrentWeatherRepositoryImpl();
         expect(
-          () => repository.getCurrentWeather(savedLocationModel: mockLocation),
+          () => repository.getCurrentWeather(location: mockLocation),
           throwsException,
         );
       });
@@ -65,7 +65,7 @@ void main() {
       test('it should return a value from server', () {
         when(
           remoteDataSource.getCurrentWeather(
-            savedLocationModel: mockLocation,
+            location: mockLocation,
           ),
         ).thenAnswer(
           (_) async => CurrentWeatherModel(
@@ -92,9 +92,7 @@ void main() {
         );
 
         final repository = CurrentWeatherRepositoryImpl();
-        repository
-            .getCurrentWeather(savedLocationModel: mockLocation)
-            .then((value) {
+        repository.getCurrentWeather(location: mockLocation).then((value) {
           expect(value, isNotNull);
           expect(value.description, isNotEmpty);
         });
@@ -103,7 +101,7 @@ void main() {
       test('it should return a value from cache', () {
         when(
           localDataSource.hasCachedWeather(
-            savedLocationModel: mockLocation,
+            location: mockLocation,
           ),
         ).thenAnswer(
           (_) async => CurrentWeatherModel(
@@ -130,9 +128,7 @@ void main() {
         );
 
         final repository = CurrentWeatherRepositoryImpl();
-        repository
-            .getCurrentWeather(savedLocationModel: mockLocation)
-            .then((value) {
+        repository.getCurrentWeather(location: mockLocation).then((value) {
           expect(value, isNotNull);
           expect(value.description, isNotEmpty);
         });
