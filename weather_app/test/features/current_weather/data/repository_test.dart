@@ -43,9 +43,11 @@ void main() {
       });
 
       test('it should return an error', () {
-        when(remoteDataSource.getCurrentWeather(
-                savedLocationModel: mockLocation))
-            .thenThrow(Exception('Something went wrong'));
+        when(
+          remoteDataSource.getCurrentWeather(
+            savedLocationModel: mockLocation,
+          ),
+        ).thenThrow(Exception('Something went wrong'));
         GetIt.I.registerFactory<CurrentWeatherLocalDataSource>(
           () => localDataSource,
         );
