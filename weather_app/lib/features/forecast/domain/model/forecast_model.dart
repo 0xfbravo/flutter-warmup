@@ -7,8 +7,6 @@ part 'forecast_model.g.dart';
 class ForecastModel {
   ForecastModel({
     required this.date,
-    required this.latitude,
-    required this.longitude,
     required this.main,
     required this.description,
     required this.icon,
@@ -26,41 +24,35 @@ class ForecastModel {
   final String date;
 
   @HiveField(1)
-  final double latitude;
-
-  @HiveField(2)
-  final double longitude;
-
-  @HiveField(3)
   final String main;
 
-  @HiveField(4)
+  @HiveField(2)
   final String description;
 
-  @HiveField(5)
+  @HiveField(3)
   final String icon;
 
-  @HiveField(6)
+  @HiveField(4)
   final double temperature;
 
-  @HiveField(7)
+  @HiveField(5)
   final double feelsLike;
 
-  @HiveField(8)
+  @HiveField(6)
   final double minTemperature;
 
-  @HiveField(9)
+  @HiveField(7)
   final double maxTemperature;
 
-  @HiveField(10)
+  @HiveField(8)
   final int? pressure;
 
-  @HiveField(11)
+  @HiveField(9)
   final int? humidity;
 
-  @HiveField(12)
+  @HiveField(10)
   final int? seaLevel;
 
-  @HiveField(13)
+  @HiveField(11)
   final int? groundLevel;
 }

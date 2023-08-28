@@ -18,53 +18,47 @@ class ForecastModelAdapter extends TypeAdapter<ForecastModel> {
     };
     return ForecastModel(
       date: fields[0] as String,
-      latitude: fields[1] as double,
-      longitude: fields[2] as double,
-      main: fields[3] as String,
-      description: fields[4] as String,
-      icon: fields[5] as String,
-      temperature: fields[6] as double,
-      feelsLike: fields[7] as double,
-      minTemperature: fields[8] as double,
-      maxTemperature: fields[9] as double,
-      pressure: fields[10] as int?,
-      humidity: fields[11] as int?,
-      seaLevel: fields[12] as int?,
-      groundLevel: fields[13] as int?,
+      main: fields[1] as String,
+      description: fields[2] as String,
+      icon: fields[3] as String,
+      temperature: fields[4] as double,
+      feelsLike: fields[5] as double,
+      minTemperature: fields[6] as double,
+      maxTemperature: fields[7] as double,
+      pressure: fields[8] as int?,
+      humidity: fields[9] as int?,
+      seaLevel: fields[10] as int?,
+      groundLevel: fields[11] as int?,
     );
   }
 
   @override
   void write(BinaryWriter writer, ForecastModel obj) {
     writer
-      ..writeByte(14)
+      ..writeByte(12)
       ..writeByte(0)
       ..write(obj.date)
       ..writeByte(1)
-      ..write(obj.latitude)
-      ..writeByte(2)
-      ..write(obj.longitude)
-      ..writeByte(3)
       ..write(obj.main)
-      ..writeByte(4)
+      ..writeByte(2)
       ..write(obj.description)
-      ..writeByte(5)
+      ..writeByte(3)
       ..write(obj.icon)
-      ..writeByte(6)
+      ..writeByte(4)
       ..write(obj.temperature)
-      ..writeByte(7)
+      ..writeByte(5)
       ..write(obj.feelsLike)
-      ..writeByte(8)
+      ..writeByte(6)
       ..write(obj.minTemperature)
-      ..writeByte(9)
+      ..writeByte(7)
       ..write(obj.maxTemperature)
-      ..writeByte(10)
+      ..writeByte(8)
       ..write(obj.pressure)
-      ..writeByte(11)
+      ..writeByte(9)
       ..write(obj.humidity)
-      ..writeByte(12)
+      ..writeByte(10)
       ..write(obj.seaLevel)
-      ..writeByte(13)
+      ..writeByte(11)
       ..write(obj.groundLevel);
   }
 

@@ -21,8 +21,6 @@ void main() {
       final mockForecast = [
         ForecastModel(
           date: DateTime.now().toIso8601String(),
-          latitude: 0,
-          longitude: 0,
           main: 'AAAA',
           description: 'AAAA',
           icon: 'AAA',
@@ -124,8 +122,6 @@ void main() {
             [
               ForecastModel(
                 date: DateTime.now().toIso8601String(),
-                latitude: 0,
-                longitude: 0,
                 main: 'AAAA',
                 description: 'AAAA',
                 icon: 'AAA',
@@ -142,8 +138,6 @@ void main() {
             [
               ForecastModel(
                 date: DateTime.now().toIso8601String(),
-                latitude: 0,
-                longitude: 0,
                 main: 'AAAA',
                 description: 'AAAA',
                 icon: 'AAA',
@@ -168,8 +162,6 @@ void main() {
       final mockForecast = [
         ForecastModel(
           date: DateTime.now().toIso8601String(),
-          latitude: 0,
-          longitude: 0,
           main: 'AAAA',
           description: 'AAAA',
           icon: 'AAA',
