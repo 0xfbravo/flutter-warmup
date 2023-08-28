@@ -8,7 +8,7 @@ abstract class CoreLocalDataSource {
   Future<LocationModel?> hasCached({
     required String query,
   });
-  Future<List<LocationModel>> getSavedLocations();
+  Future<List<LocationModel>> getLocations();
   Future<bool> saveLocation({
     required LocationModel location,
   });
@@ -28,7 +28,7 @@ class CoreLocalDataSourceImpl implements CoreLocalDataSource {
   }
 
   @override
-  Future<List<LocationModel>> getSavedLocations() async {
+  Future<List<LocationModel>> getLocations() async {
     final hiveBox = await _getHiveBox();
     return hiveBox.values.toList();
   }

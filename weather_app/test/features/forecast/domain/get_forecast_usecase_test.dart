@@ -24,7 +24,7 @@ void main() {
     });
 
     test('it should return an error', () async {
-      await setupDependencyInjection();
+      await setupDependencyInjection(isTest: true);
       final useCase = GetForecastUseCaseImpl();
 
       expect(
@@ -42,7 +42,7 @@ void main() {
     test(
       'it should return forecast',
       () async {
-        await setupDependencyInjection();
+        await setupDependencyInjection(isTest: true);
         final useCase = GetForecastUseCaseImpl();
 
         // From remote

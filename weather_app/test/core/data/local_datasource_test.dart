@@ -37,7 +37,7 @@ void main() {
             .hasCached(query: query)
             .then((value) => expect(value, isNull));
 
-        await setupDependencyInjection();
+        await setupDependencyInjection(isTest: true);
         final datasource = GetIt.I<CoreLocalDataSource>();
         await datasource
             .hasCached(query: 'Abubleblé, Das Ideias')
@@ -63,7 +63,7 @@ void main() {
       });
     });
 
-    group('getSavedLocations', () {
+    group('getLocations', () {
       setUp(() async {
         await dotenv.load(fileName: '.env');
         Hive.init('./hive-tests');
@@ -78,31 +78,28 @@ void main() {
 
       test('it should return a empty list', () async {
         final mock = MockCoreLocalDataSource();
-        when(mock.getSavedLocations()).thenAnswer((_) async => []);
-        await mock.getSavedLocations().then((value) => expect(value, isEmpty));
+        when(mock.getLocations()).thenAnswer((_) async => []);
+        await mock.getLocations().then((value) => expect(value, isEmpty));
 
-        await setupDependencyInjection();
+        await setupDependencyInjection(isTest: true);
         final datasource = GetIt.I<CoreLocalDataSource>();
-        await datasource
-            .getSavedLocations()
-            .then((value) => expect(value, isEmpty));
+        await datasource.getLocations().then((value) => expect(value, isEmpty));
       });
 
       test('it should return an error', () {
         final mock = MockCoreLocalDataSource();
-        when(mock.getSavedLocations())
-            .thenThrow(Exception('Something went wrong'));
-        expect(mock.getSavedLocations, throwsException);
+        when(mock.getLocations()).thenThrow(Exception('Something went wrong'));
+        expect(mock.getLocations, throwsException);
       });
 
       test('it should return a valid list', () {
         final mock = MockCoreLocalDataSource();
-        when(mock.getSavedLocations()).thenAnswer(
+        when(mock.getLocations()).thenAnswer(
           (_) async => [
             LocationModel(name: 'Mock Location', lat: 0, lon: 0),
           ],
         );
-        mock.getSavedLocations().then((value) => expect(value, isNotEmpty));
+        mock.getLocations().then((value) => expect(value, isNotEmpty));
       });
     });
 
@@ -129,7 +126,7 @@ void main() {
             .saveLocation(location: mockLocation)
             .then((value) => expect(value, isTrue));
 
-        await setupDependencyInjection();
+        await setupDependencyInjection(isTest: true);
         final datasource = GetIt.I<CoreLocalDataSource>();
         await datasource
             .saveLocation(location: mockLocation)

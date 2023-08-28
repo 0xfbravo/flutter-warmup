@@ -71,7 +71,7 @@ void main() {
       });
 
       test('it should do a successful request', () async {
-        await setupDependencyInjection();
+        await setupDependencyInjection(isTest: true);
         final datasource = GetIt.I<CurrentWeatherRemoteDataSource>();
         await datasource
             .getCurrentWeather(location: mockLocation)
@@ -82,7 +82,7 @@ void main() {
       });
 
       test('it should do an unsuccessful request', () async {
-        await setupDependencyInjection();
+        await setupDependencyInjection(isTest: true);
         final datasource = GetIt.I<CurrentWeatherRemoteDataSource>();
         expect(
           () => datasource.getCurrentWeather(

@@ -54,7 +54,7 @@ void main() {
             .hasCached(location: mockLocation)
             .then((value) => expect(value, isNull));
 
-        await setupDependencyInjection();
+        await setupDependencyInjection(isTest: true);
         final datasource = GetIt.I<CurrentWeatherLocalDataSource>();
         await datasource
             .hasCached(location: mockLocation)
@@ -100,7 +100,7 @@ void main() {
         when(mock.getSavedWeathers()).thenAnswer((_) async => []);
         await mock.getSavedWeathers().then((value) => expect(value, isEmpty));
 
-        await setupDependencyInjection();
+        await setupDependencyInjection(isTest: true);
         final datasource = GetIt.I<CurrentWeatherLocalDataSource>();
         await datasource
             .getSavedWeathers()
@@ -177,7 +177,7 @@ void main() {
             .saveWeather(location: mockLocation, weather: mockWeather)
             .then((value) => expect(value, isTrue));
 
-        await setupDependencyInjection();
+        await setupDependencyInjection(isTest: true);
         final datasource = GetIt.I<CurrentWeatherLocalDataSource>();
         await datasource
             .saveWeather(location: mockLocation, weather: mockWeather)

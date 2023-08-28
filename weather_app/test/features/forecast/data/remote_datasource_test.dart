@@ -72,7 +72,7 @@ void main() {
       });
 
       test('it should do a successful request', () async {
-        await setupDependencyInjection();
+        await setupDependencyInjection(isTest: true);
         final datasource = GetIt.I<ForecastRemoteDataSource>();
         await datasource.getForecast(location: mockLocation).then((value) {
           expect(value, isNotNull);
@@ -81,7 +81,7 @@ void main() {
       });
 
       test('it should do an unsuccessful request', () async {
-        await setupDependencyInjection();
+        await setupDependencyInjection(isTest: true);
         final datasource = GetIt.I<ForecastRemoteDataSource>();
         expect(
           () => datasource.getForecast(

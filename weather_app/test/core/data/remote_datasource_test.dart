@@ -49,7 +49,7 @@ void main() {
       });
 
       test('it should do a successful request', () async {
-        await setupDependencyInjection();
+        await setupDependencyInjection(isTest: true);
         final datasource = GetIt.I<CoreRemoteDataSource>();
         await datasource
             .searchLocation(query: 'Monte Carlo, Monaco')
@@ -60,7 +60,7 @@ void main() {
       });
 
       test('it should do an unsuccessful request', () async {
-        await setupDependencyInjection();
+        await setupDependencyInjection(isTest: true);
         final datasource = GetIt.I<CoreRemoteDataSource>();
         expect(
           () => datasource.searchLocation(query: 'Abubleblé, Das Ideias'),

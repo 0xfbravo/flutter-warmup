@@ -7,7 +7,7 @@ import 'package:weather_app/core/data/remote_datasource.dart';
 import 'package:weather_app/core/domain/model/location_model.dart';
 
 abstract class CoreRepository {
-  Future<List<LocationModel>> getSavedLocations();
+  Future<List<LocationModel>> getLocations();
   Future<LocationModel> searchLocation({
     required String query,
   });
@@ -18,8 +18,8 @@ class CoreRepositoryImpl implements CoreRepository {
   final CoreRemoteDataSource _remoteDataSource = GetIt.I();
 
   @override
-  Future<List<LocationModel>> getSavedLocations() async {
-    return _localDataSource.getSavedLocations();
+  Future<List<LocationModel>> getLocations() async {
+    return _localDataSource.getLocations();
   }
 
   @override

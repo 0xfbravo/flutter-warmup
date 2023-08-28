@@ -3,21 +3,24 @@ import 'package:dio/dio.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get_it/get_it.dart';
 import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 // 🌎 Project imports:
 import 'package:weather_app/core/data/local_datasource.dart';
 import 'package:weather_app/core/data/remote_datasource.dart';
 import 'package:weather_app/core/data/repository.dart';
 import 'package:weather_app/core/domain/model/location_model.dart';
-import 'package:weather_app/core/domain/usecases/get_saved_locations_usecase.dart';
+import 'package:weather_app/core/domain/usecases/get_locations_usecase.dart';
 import 'package:weather_app/core/domain/usecases/search_location_usecase.dart';
 import 'package:weather_app/features/current_weather/dependency_injection.dart';
 import 'package:weather_app/features/current_weather/domain/model/current_weather_model.dart';
 import 'package:weather_app/features/forecast/dependency_injection.dart';
 import 'package:weather_app/features/forecast/domain/model/forecast_model.dart';
 
-Future<void> setupDependencyInjection() async {
-  await CorePackage.setup();
+Future<void> setupDependencyInjection({
+  required bool isTest,
+}) async {
+  await CorePackage.setup(isTest: isTest);
   CurrentWeatherPackage.setup();
   ForecastPackage.setup();
 }
@@ -25,16 +28,20 @@ Future<void> setupDependencyInjection() async {
 class CorePackage {
   CorePackage._();
 
-  static Future<void> setup() async {
-    await _setupHive();
+  static Future<void> setup({required bool isTest}) async {
+    await _setupHive(isTest: isTest);
     _setupDio();
     _setupData();
     _setupDomain();
   }
 
-  static Future<void> _setupHive() async {
+  static Future<void> _setupHive({required bool isTest}) async {
+    if (!isTest) {
+      await Hive.initFlutter('./hive');
+    } else {
+      Hive.init('./hive-tests');
+    }
     Hive
-      ..init('./hive')
       ..registerAdapter(LocationModelAdapter())
       ..registerAdapter(CurrentWeatherModelAdapter())
       ..registerAdapter(ForecastModelAdapter());
@@ -67,8 +74,8 @@ class CorePackage {
 
   static void _setupDomain() {
     GetIt.I
-      ..registerFactory<GetSavedLocationsUseCase>(
-        GetSavedLocationsUseCaseImpl.new,
+      ..registerFactory<GetLocationsUseCase>(
+        GetLocationsUseCaseImpl.new,
       )
       ..registerFactory<SearchLocationUseCase>(
         SearchLocationUseCaseImpl.new,

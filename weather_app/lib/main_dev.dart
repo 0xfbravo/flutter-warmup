@@ -18,6 +18,6 @@ void main() async {
   /// Transmit Security. (https://transmitsecurity.com/)
   await dotenv.load(fileName: '.env');
   debugPrint('.env Loaded: ${dotenv.env}');
-  await setupDependencyInjection();
+  await setupDependencyInjection(isTest: false);
   runApp(const WeatherApp());
 }

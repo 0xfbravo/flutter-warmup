@@ -35,10 +35,9 @@ class _FakeLocationModel_0 extends _i1.SmartFake implements _i2.LocationModel {
 /// See the documentation for Mockito's code generation for more information.
 class MockCoreRepository extends _i1.Mock implements _i3.CoreRepository {
   @override
-  _i4.Future<List<_i2.LocationModel>> getSavedLocations() =>
-      (super.noSuchMethod(
+  _i4.Future<List<_i2.LocationModel>> getLocations() => (super.noSuchMethod(
         Invocation.method(
-          #getSavedLocations,
+          #getLocations,
           [],
         ),
         returnValue:

@@ -37,10 +37,9 @@ class MockCoreLocalDataSource extends _i1.Mock
         returnValueForMissingStub: _i3.Future<_i4.LocationModel?>.value(),
       ) as _i3.Future<_i4.LocationModel?>);
   @override
-  _i3.Future<List<_i4.LocationModel>> getSavedLocations() =>
-      (super.noSuchMethod(
+  _i3.Future<List<_i4.LocationModel>> getLocations() => (super.noSuchMethod(
         Invocation.method(
-          #getSavedLocations,
+          #getLocations,
           [],
         ),
         returnValue:

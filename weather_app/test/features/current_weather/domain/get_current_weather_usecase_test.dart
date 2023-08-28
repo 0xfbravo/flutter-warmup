@@ -24,7 +24,7 @@ void main() {
     });
 
     test('it should return an error', () async {
-      await setupDependencyInjection();
+      await setupDependencyInjection(isTest: true);
       final useCase = GetCurrentWeatherUseCaseImpl();
 
       expect(
@@ -42,7 +42,7 @@ void main() {
     test(
       'it should return current weather',
       () async {
-        await setupDependencyInjection();
+        await setupDependencyInjection(isTest: true);
         final useCase = GetCurrentWeatherUseCaseImpl();
 
         // From remote

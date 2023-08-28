@@ -6,7 +6,7 @@ import 'package:hive/hive.dart';
 
 // 🌎 Project imports:
 import 'package:weather_app/core/dependency_injection.dart';
-import 'package:weather_app/core/domain/usecases/get_saved_locations_usecase.dart';
+import 'package:weather_app/core/domain/usecases/get_locations_usecase.dart';
 
 void main() {
   group('[Core] Get Saved Locations Use Case', () {
@@ -23,8 +23,8 @@ void main() {
     });
 
     test('it should return a empty list', () async {
-      await setupDependencyInjection();
-      final useCase = GetSavedLocationsUseCaseImpl();
+      await setupDependencyInjection(isTest: true);
+      final useCase = GetLocationsUseCaseImpl();
       await useCase().then((value) => expect(value, isEmpty));
     });
   });

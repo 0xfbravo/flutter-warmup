@@ -23,7 +23,7 @@ void main() {
     });
 
     test('it should return a value from server', () async {
-      await setupDependencyInjection();
+      await setupDependencyInjection(isTest: true);
       final mock = CoreRepositoryImpl();
       await mock.searchLocation(query: 'São Paulo, Brazil').then((value) {
         expect(value, isNotNull);

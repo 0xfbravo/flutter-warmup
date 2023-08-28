@@ -22,7 +22,7 @@ void main() {
   final remoteDataSource = MockCoreRemoteDataSource();
 
   group('[Core] Repository', () {
-    group('getSavedLocations', () {
+    group('getLocations', () {
       setUp(() async {
         await dotenv.load(fileName: '.env');
         Hive.init('./hive-tests');
@@ -36,26 +36,26 @@ void main() {
       });
 
       test('it should return a empty list', () {
-        when(localDataSource.getSavedLocations()).thenAnswer((_) async => []);
+        when(localDataSource.getLocations()).thenAnswer((_) async => []);
         GetIt.I.registerFactory<CoreLocalDataSource>(() => localDataSource);
         GetIt.I.registerFactory<CoreRemoteDataSource>(() => remoteDataSource);
 
         final repository = CoreRepositoryImpl();
-        repository.getSavedLocations().then((value) => expect(value, isEmpty));
+        repository.getLocations().then((value) => expect(value, isEmpty));
       });
 
       test('it should return an error', () {
-        when(localDataSource.getSavedLocations())
+        when(localDataSource.getLocations())
             .thenThrow(Exception('Something went wrong'));
         GetIt.I.registerFactory<CoreLocalDataSource>(() => localDataSource);
         GetIt.I.registerFactory<CoreRemoteDataSource>(() => remoteDataSource);
 
         final repository = CoreRepositoryImpl();
-        expect(repository.getSavedLocations, throwsException);
+        expect(repository.getLocations, throwsException);
       });
 
       test('it should return a valid list', () {
-        when(localDataSource.getSavedLocations()).thenAnswer(
+        when(localDataSource.getLocations()).thenAnswer(
           (_) async => [
             LocationModel(name: 'Mock Location', lat: 0, lon: 0),
           ],
@@ -64,9 +64,7 @@ void main() {
         GetIt.I.registerFactory<CoreRemoteDataSource>(() => remoteDataSource);
 
         final repository = CoreRepositoryImpl();
-        repository
-            .getSavedLocations()
-            .then((value) => expect(value, isNotEmpty));
+        repository.getLocations().then((value) => expect(value, isNotEmpty));
       });
     });
 
