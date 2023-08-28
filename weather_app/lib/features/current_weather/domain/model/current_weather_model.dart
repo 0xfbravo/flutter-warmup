@@ -1,3 +1,4 @@
+// 📦 Package imports:
 import 'package:hive/hive.dart';
 
 part 'current_weather_model.g.dart';

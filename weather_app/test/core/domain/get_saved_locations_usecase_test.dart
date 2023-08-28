@@ -3,6 +3,8 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:hive/hive.dart';
+
+// 🌎 Project imports:
 import 'package:weather_app/core/dependency_injection.dart';
 import 'package:weather_app/core/domain/usecases/get_saved_locations_usecase.dart';
 

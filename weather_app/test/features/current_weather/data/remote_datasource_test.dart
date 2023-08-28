@@ -39,8 +39,10 @@ void main() {
         final mock = MockCurrentWeatherRemoteDataSource();
         when(mock.getCurrentWeather(savedLocationModel: mockLocation))
             .thenThrow(Exception('Something went wrong'));
-        expect(() => mock.getCurrentWeather(savedLocationModel: mockLocation),
-            throwsException);
+        expect(
+          () => mock.getCurrentWeather(savedLocationModel: mockLocation),
+          throwsException,
+        );
       });
 
       test('it should return a value', () {
