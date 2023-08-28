@@ -15,7 +15,7 @@ import 'local_datasource_test.mocks.dart';
 @GenerateNiceMocks([MockSpec<CoreLocalDataSource>()])
 void main() {
   group('[Core] Local Datasource', () {
-    group('hasCachedLocation', () {
+    group('hasCached', () {
       const query = 'Mock Location, Mock';
 
       setUp(() async {
@@ -32,32 +32,31 @@ void main() {
 
       test('it should return nulll (no cached location)', () async {
         final mock = MockCoreLocalDataSource();
-        when(mock.hasCachedLocation(query: query))
-            .thenAnswer((_) async => null);
+        when(mock.hasCached(query: query)).thenAnswer((_) async => null);
         await mock
-            .hasCachedLocation(query: query)
+            .hasCached(query: query)
             .then((value) => expect(value, isNull));
 
         await setupDependencyInjection();
         final datasource = GetIt.I<CoreLocalDataSource>();
         await datasource
-            .hasCachedLocation(query: 'Abubleblé, Das Ideias')
+            .hasCached(query: 'Abubleblé, Das Ideias')
             .then((value) => expect(value, isNull));
       });
 
       test('it should return an error', () {
         final mock = MockCoreLocalDataSource();
-        when(mock.hasCachedLocation(query: query))
+        when(mock.hasCached(query: query))
             .thenThrow(Exception('Something went wrong'));
-        expect(() => mock.hasCachedLocation(query: query), throwsException);
+        expect(() => mock.hasCached(query: query), throwsException);
       });
 
       test('it should return a cached location', () {
         final mock = MockCoreLocalDataSource();
-        when(mock.hasCachedLocation(query: query)).thenAnswer(
+        when(mock.hasCached(query: query)).thenAnswer(
           (_) async => LocationModel(name: 'Mock Location', lat: 0, lon: 0),
         );
-        mock.hasCachedLocation(query: query).then((value) {
+        mock.hasCached(query: query).then((value) {
           expect(value, isNotNull);
           expect(value!.name.isNotEmpty, isTrue);
         });

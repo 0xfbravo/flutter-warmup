@@ -100,7 +100,7 @@ void main() {
 
       test('it should return a value from cache', () {
         when(
-          localDataSource.hasCachedWeather(
+          localDataSource.hasCached(
             location: mockLocation,
           ),
         ).thenAnswer(

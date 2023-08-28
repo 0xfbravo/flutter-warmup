@@ -110,7 +110,7 @@ void main() {
       });
 
       test('it should return a value from cache', () {
-        when(localDataSource.hasCachedLocation(query: query)).thenAnswer(
+        when(localDataSource.hasCached(query: query)).thenAnswer(
           (_) async => LocationModel(name: 'Mock Location', lat: 0, lon: 0),
         );
         GetIt.I.registerFactory<CoreLocalDataSource>(() => localDataSource);

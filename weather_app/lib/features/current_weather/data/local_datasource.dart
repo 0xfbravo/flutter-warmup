@@ -6,7 +6,7 @@ import 'package:weather_app/core/domain/model/location_model.dart';
 import 'package:weather_app/features/current_weather/domain/model/current_weather_model.dart';
 
 abstract class CurrentWeatherLocalDataSource {
-  Future<CurrentWeatherModel?> hasCachedWeather({
+  Future<CurrentWeatherModel?> hasCached({
     required LocationModel location,
   });
   Future<List<CurrentWeatherModel>> getSavedWeathers();
@@ -23,7 +23,7 @@ class CurrentWeatherLocalDataSourceImpl
   }
 
   @override
-  Future<CurrentWeatherModel?> hasCachedWeather({
+  Future<CurrentWeatherModel?> hasCached({
     required LocationModel location,
   }) async {
     final hiveBox = await _getHiveBox();

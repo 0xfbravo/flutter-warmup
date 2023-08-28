@@ -16,7 +16,7 @@ import 'local_datasource_test.mocks.dart';
 @GenerateNiceMocks([MockSpec<CurrentWeatherLocalDataSource>()])
 void main() {
   group('[Feature/Current Weather] Local Datasource', () {
-    group('hasCachedWeather', () {
+    group('hasCached', () {
       final mockLocation = LocationModel(name: 'Mock Location', lat: 0, lon: 0);
       final mockWeather = CurrentWeatherModel(
         latitude: 0,
@@ -48,34 +48,34 @@ void main() {
 
       test('it should return nulll (no cached weather)', () async {
         final mock = MockCurrentWeatherLocalDataSource();
-        when(mock.hasCachedWeather(location: mockLocation))
+        when(mock.hasCached(location: mockLocation))
             .thenAnswer((_) async => null);
         await mock
-            .hasCachedWeather(location: mockLocation)
+            .hasCached(location: mockLocation)
             .then((value) => expect(value, isNull));
 
         await setupDependencyInjection();
         final datasource = GetIt.I<CurrentWeatherLocalDataSource>();
         await datasource
-            .hasCachedWeather(location: mockLocation)
+            .hasCached(location: mockLocation)
             .then((value) => expect(value, isNull));
       });
 
       test('it should return an error', () {
         final mock = MockCurrentWeatherLocalDataSource();
-        when(mock.hasCachedWeather(location: mockLocation))
+        when(mock.hasCached(location: mockLocation))
             .thenThrow(Exception('Something went wrong'));
         expect(
-          () => mock.hasCachedWeather(location: mockLocation),
+          () => mock.hasCached(location: mockLocation),
           throwsException,
         );
       });
 
       test('it should return a cached weather', () {
         final mock = MockCurrentWeatherLocalDataSource();
-        when(mock.hasCachedWeather(location: mockLocation))
+        when(mock.hasCached(location: mockLocation))
             .thenAnswer((_) async => mockWeather);
-        mock.hasCachedWeather(location: mockLocation).then((value) {
+        mock.hasCached(location: mockLocation).then((value) {
           expect(value, isNotNull);
           expect(value!.description, isNotEmpty);
         });

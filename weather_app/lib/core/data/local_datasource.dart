@@ -5,7 +5,7 @@ import 'package:hive/hive.dart';
 import 'package:weather_app/core/domain/model/location_model.dart';
 
 abstract class CoreLocalDataSource {
-  Future<LocationModel?> hasCachedLocation({
+  Future<LocationModel?> hasCached({
     required String query,
   });
   Future<List<LocationModel>> getSavedLocations();
@@ -20,7 +20,7 @@ class CoreLocalDataSourceImpl implements CoreLocalDataSource {
   }
 
   @override
-  Future<LocationModel?> hasCachedLocation({
+  Future<LocationModel?> hasCached({
     required String query,
   }) async {
     final hiveBox = await _getHiveBox();

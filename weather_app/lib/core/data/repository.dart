@@ -26,8 +26,7 @@ class CoreRepositoryImpl implements CoreRepository {
   Future<LocationModel> searchLocation({
     required String query,
   }) async {
-    final cachedLocation =
-        await _localDataSource.hasCachedLocation(query: query);
+    final cachedLocation = await _localDataSource.hasCached(query: query);
     if (cachedLocation != null) {
       return cachedLocation;
     }

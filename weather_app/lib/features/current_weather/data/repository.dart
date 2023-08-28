@@ -21,7 +21,7 @@ class CurrentWeatherRepositoryImpl implements CurrentWeatherRepository {
   Future<CurrentWeatherModel> getCurrentWeather({
     required LocationModel location,
   }) async {
-    final cachedWeather = await localDataSource.hasCachedWeather(
+    final cachedWeather = await localDataSource.hasCached(
       location: location,
     );
     if (cachedWeather != null) {

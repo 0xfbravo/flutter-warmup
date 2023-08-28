@@ -29,11 +29,11 @@ import 'package:weather_app/features/current_weather/domain/model/current_weathe
 class MockCurrentWeatherLocalDataSource extends _i1.Mock
     implements _i2.CurrentWeatherLocalDataSource {
   @override
-  _i3.Future<_i4.CurrentWeatherModel?> hasCachedWeather(
+  _i3.Future<_i4.CurrentWeatherModel?> hasCached(
           {required _i5.LocationModel? location}) =>
       (super.noSuchMethod(
         Invocation.method(
-          #hasCachedWeather,
+          #hasCached,
           [],
           {#location: location},
         ),

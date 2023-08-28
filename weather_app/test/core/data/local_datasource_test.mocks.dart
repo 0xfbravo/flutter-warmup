@@ -26,10 +26,10 @@ import 'package:weather_app/core/domain/model/location_model.dart' as _i4;
 class MockCoreLocalDataSource extends _i1.Mock
     implements _i2.CoreLocalDataSource {
   @override
-  _i3.Future<_i4.LocationModel?> hasCachedLocation({required String? query}) =>
+  _i3.Future<_i4.LocationModel?> hasCached({required String? query}) =>
       (super.noSuchMethod(
         Invocation.method(
-          #hasCachedLocation,
+          #hasCached,
           [],
           {#query: query},
         ),
